@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		493DCA0D1703852E00BABFED /* quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 493DCA0C1703852E00BABFED /* quotes.plist */; };
 		49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF71702560F007D65E1 /* UIKit.framework */; };
 		49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF91702560F007D65E1 /* Foundation.framework */; };
 		49BD4CFC1702560F007D65E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CFB1702560F007D65E1 /* CoreGraphics.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		493DCA0C1703852E00BABFED /* quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = quotes.plist; sourceTree = "<group>"; };
 		49BD4CF41702560F007D65E1 /* SpeakerSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakerSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD4CF71702560F007D65E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		49BD4CF91702560F007D65E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,6 +121,7 @@
 		49BD4CFD1702560F007D65E1 /* SpeakerSocial */ = {
 			isa = PBXGroup;
 			children = (
+				493DCA0C1703852E00BABFED /* quotes.plist */,
 				49BD4D061702560F007D65E1 /* AppDelegate.h */,
 				49BD4D071702560F007D65E1 /* AppDelegate.m */,
 				49BD4D0F1702560F007D65E1 /* MainStoryboard_iPhone.storyboard */,
@@ -240,6 +243,7 @@
 				49BD4D0E1702560F007D65E1 /* Default-568h@2x.png in Resources */,
 				49BD4D111702560F007D65E1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				49BD4D141702560F007D65E1 /* MainStoryboard_iPad.storyboard in Resources */,
+				493DCA0D1703852E00BABFED /* quotes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +471,7 @@
 				49BD4D311702560F007D65E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49BD4D321702560F007D65E1 /* Build configuration list for PBXNativeTarget "SpeakerSocialTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +480,7 @@
 				49BD4D341702560F007D65E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
