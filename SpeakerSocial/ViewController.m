@@ -36,7 +36,7 @@
     NSString * the_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
     NSLog(@"response: %@", the_string);
     self.quoteText.text = [NSString stringWithFormat:@"get time response: %@",  the_string];
-
+    
 }
 
 

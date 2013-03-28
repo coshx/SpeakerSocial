@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49330AF717049F6E00A14167 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49330AF617049F6E00A14167 /* AVFoundation.framework */; };
 		493DCA0D1703852E00BABFED /* quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 493DCA0C1703852E00BABFED /* quotes.plist */; };
 		49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF71702560F007D65E1 /* UIKit.framework */; };
 		49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF91702560F007D65E1 /* Foundation.framework */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49330AF617049F6E00A14167 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		493DCA0C1703852E00BABFED /* quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = quotes.plist; sourceTree = "<group>"; };
 		49BD4CF41702560F007D65E1 /* SpeakerSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakerSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD4CF71702560F007D65E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49330AF717049F6E00A14167 /* AVFoundation.framework in Frameworks */,
 				49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */,
 				49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */,
 				49BD4CFC1702560F007D65E1 /* CoreGraphics.framework in Frameworks */,
@@ -91,6 +94,7 @@
 		49BD4CEB1702560E007D65E1 = {
 			isa = PBXGroup;
 			children = (
+				49330AF617049F6E00A14167 /* AVFoundation.framework */,
 				49BD4CFD1702560F007D65E1 /* SpeakerSocial */,
 				49BD4D241702560F007D65E1 /* SpeakerSocialTests */,
 				49BD4CF61702560F007D65E1 /* Frameworks */,
