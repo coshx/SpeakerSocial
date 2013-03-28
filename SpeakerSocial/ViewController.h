@@ -7,11 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface ViewController : UIViewController
+
+@interface ViewController : UIViewController{
+    AVAudioPlayer *audioPlayer;
+}
 
 @property (nonatomic, strong) IBOutlet UITextView *quoteText;
 
-- (IBAction)quoteButtonTapped:(id)sender;
+- (IBAction)subscribeButtonTapped:(id)sender;
+
+- (IBAction)broadcastButtonTapped:(id)sender;
+
+- (IBAction)pauseButtonTapped:(id)sender;
+
+-(NSString*)httpGet:(NSString*)url;
+
+-(NSString*)httpPost: (NSString*)url :(NSString*)data;
+
+
 
 @end

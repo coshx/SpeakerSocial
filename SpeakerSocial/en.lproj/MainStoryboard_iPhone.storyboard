@@ -22,9 +22,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Poz-AP-n5a">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8q-9K-E9L">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Server Time">
+                                <state key="normal" title="Subscribe">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -32,20 +32,50 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="quoteButtonTapped:" destination="2" eventType="touchUpInside" id="oMG-te-DPQ"/>
+                                    <action selector="subscribeButtonTapped:" destination="2" eventType="touchUpInside" id="aGB-W9-zWf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjm-fi-Nah">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Broadcast">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="broadcastButtonTapped:" destination="2" eventType="touchUpInside" id="gWx-6V-S7O"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSq-9n-88I">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Pause">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseButtonTapped:" destination="2" eventType="touchUpInside" id="FVN-r1-Hld"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Poz-AP-n5a" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="LrQ-Fa-9yY"/>
+                            <constraint firstItem="sjm-fi-Nah" firstAttribute="leading" secondItem="H8q-9K-E9L" secondAttribute="leading" type="default" id="9kl-p3-BPq"/>
+                            <constraint firstAttribute="bottom" secondItem="sjm-fi-Nah" secondAttribute="bottom" constant="135" id="Uqg-4w-9qB"/>
+                            <constraint firstItem="H8q-9K-E9L" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="109" id="WoM-5C-7ub"/>
                             <constraint firstItem="oIO-cE-fBg" firstAttribute="top" secondItem="3" secondAttribute="top" constant="92" id="Yev-l5-NnO"/>
-                            <constraint firstItem="Poz-AP-n5a" firstAttribute="top" secondItem="3" secondAttribute="top" constant="261" id="rff-oP-kxk"/>
-                            <constraint firstItem="Poz-AP-n5a" firstAttribute="centerX" secondItem="oIO-cE-fBg" secondAttribute="centerX" type="default" id="vua-xO-Naw"/>
+                            <constraint firstItem="oIO-cE-fBg" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="ZGV-GK-Rdc"/>
+                            <constraint firstAttribute="bottom" secondItem="H8q-9K-E9L" secondAttribute="bottom" constant="194" id="aN6-1L-exH"/>
+                            <constraint firstAttribute="bottom" secondItem="WSq-9n-88I" secondAttribute="bottom" constant="50" id="g4W-3Y-dHH"/>
+                            <constraint firstItem="WSq-9n-88I" firstAttribute="centerX" secondItem="oIO-cE-fBg" secondAttribute="centerX" type="default" id="iXF-1R-zDL"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="quoteText" destination="oIO-cE-fBg" id="XWJ-Gi-ziO"/>
+                        <outlet property="quoteText" destination="oIO-cE-fBg" id="92f-d2-SXW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -60,9 +90,9 @@
         <class className="ViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
-                <relationship kind="action" name="quoteButtonTapped:"/>
-                <relationship kind="outlet" name="categoryText" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="quoteOpt" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="broadcastButtonTapped:"/>
+                <relationship kind="action" name="pauseButtonTapped:"/>
+                <relationship kind="action" name="subscribeButtonTapped:"/>
                 <relationship kind="outlet" name="quoteText" candidateClass="UITextView"/>
             </relationships>
         </class>
