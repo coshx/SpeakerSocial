@@ -1,6 +1,7 @@
 #import "ViewController.h"
 #import "Network.h"
 #import "JSON.h"
+#import "Audio.h"
 @interface ViewController ()
 @end
 
@@ -9,7 +10,9 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self loadAudio];
+    self.audio = [[Audio alloc] init];
+    
+    [self.audio load];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -23,39 +26,16 @@
     //NSArray* songTitle = [song objectForKey:@"title"];
     //NSArray* songUrl = [song objectForKey:@"url"];
     double songPosition = ([[NSDate date] timeIntervalSince1970]*1000 - [[songData objectForKey:@"serverStartTime"] doubleValue])/1000 ;
-    NSInteger songDuration = [self songDuration];
+    NSInteger songDuration = [self.audio duration];
+    
     if(songPosition>songDuration){
         self.quoteText.text = [NSString stringWithFormat:@"Song has ended, please broadcast again"];
-    }else
-        [self playAudio:songPosition];
-}
--(IBAction)pauseButtonTapped:(id)sender{
-    [self mute];
-}
--(void)playAudio:(double)position{
-    self.audioPlayer.volume = 1.0;
-    self.audioPlayer.currentTime = position;
-    self.quoteText.text = [NSString stringWithFormat:@" audioPlayer.currentTime: %f", self.audioPlayer.currentTime];
-
-}
--(void)loadAudio{
-    NSURL *url = [NSURL URLWithString:@"http://chielo.herokuapp.com/media/Meter.mp3"];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
-	self.audioPlayer.numberOfLoops = 1;
-    if (self.audioPlayer == nil)
-        NSLog(@"%@",@"Error loadAudio - Unable to load audio");
-    else{
-        [self.audioPlayer play];
-        self.audioPlayer.volume = 0.0;
+    }else{
+        [self.audio play:songPosition];
+        self.quoteText.text = [NSString stringWithFormat:@" audioPlayer.currentTime: %f", [self.audio currentTime]];
     }
 }
--(NSInteger)songDuration{
-    return self.audioPlayer.duration;
+-(IBAction)pauseButtonTapped:(id)sender{
+    [self.audio mute];
 }
--(void)mute{
-    self.audioPlayer.volume = 0.0;
-    //[self.audioPlayer pause];  //[audioPlayer stop];
-}
-
 @end
