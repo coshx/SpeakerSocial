@@ -8,17 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4908D67B1704A0D900BB67DC /* cross.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D67A1704A0D900BB67DC /* cross.mp3 */; };
-		4908D6871704AE4A00BB67DC /* friday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D67C1704AE4900BB67DC /* friday.mp3 */; };
-		4908D6881704AE4A00BB67DC /* LayYourHead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D67D1704AE4900BB67DC /* LayYourHead.mp3 */; };
-		4908D6891704AE4A00BB67DC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4908D67E1704AE4A00BB67DC /* LICENSE */; };
-		4908D68A1704AE4A00BB67DC /* LonelyGirl.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D67F1704AE4A00BB67DC /* LonelyGirl.mp3 */; };
 		4908D68B1704AE4A00BB67DC /* Meter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6801704AE4A00BB67DC /* Meter.mp3 */; };
-		4908D68C1704AE4A00BB67DC /* rainbow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6811704AE4A00BB67DC /* rainbow.mp3 */; };
-		4908D68D1704AE4A00BB67DC /* TheCall.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6821704AE4A00BB67DC /* TheCall.mp3 */; };
-		4908D68E1704AE4A00BB67DC /* thirdday.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6831704AE4A00BB67DC /* thirdday.mp3 */; };
-		4908D68F1704AE4A00BB67DC /* VenusImMilo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6841704AE4A00BB67DC /* VenusImMilo.mp3 */; };
-		4908D6901704AE4A00BB67DC /* WeBelong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6851704AE4A00BB67DC /* WeBelong.mp3 */; };
-		4908D6911704AE4A00BB67DC /* Word.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4908D6861704AE4A00BB67DC /* Word.mp3 */; };
+		49195D6C17090AF400570332 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 49195D6B17090AF400570332 /* Network.m */; };
+		49195D6F1709125200570332 /* JSON.h in Resources */ = {isa = PBXBuildFile; fileRef = 49195D6E1709125200570332 /* JSON.h */; };
+		49195D71170912A700570332 /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 49195D70170912A700570332 /* JSON.m */; };
 		49330AF717049F6E00A14167 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49330AF617049F6E00A14167 /* AVFoundation.framework */; };
 		493DCA0D1703852E00BABFED /* quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 493DCA0C1703852E00BABFED /* quotes.plist */; };
 		49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF71702560F007D65E1 /* UIKit.framework */; };
@@ -52,17 +45,11 @@
 
 /* Begin PBXFileReference section */
 		4908D67A1704A0D900BB67DC /* cross.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = cross.mp3; path = ../../../speakerapp/public/media/cross.mp3; sourceTree = "<group>"; };
-		4908D67C1704AE4900BB67DC /* friday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = friday.mp3; path = ../../../speakerapp/public/media/friday.mp3; sourceTree = "<group>"; };
-		4908D67D1704AE4900BB67DC /* LayYourHead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LayYourHead.mp3; path = ../../../speakerapp/public/media/LayYourHead.mp3; sourceTree = "<group>"; };
-		4908D67E1704AE4A00BB67DC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../../speakerapp/public/media/LICENSE; sourceTree = "<group>"; };
-		4908D67F1704AE4A00BB67DC /* LonelyGirl.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = LonelyGirl.mp3; path = ../../../speakerapp/public/media/LonelyGirl.mp3; sourceTree = "<group>"; };
 		4908D6801704AE4A00BB67DC /* Meter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Meter.mp3; path = ../../../speakerapp/public/media/Meter.mp3; sourceTree = "<group>"; };
-		4908D6811704AE4A00BB67DC /* rainbow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = rainbow.mp3; path = ../../../speakerapp/public/media/rainbow.mp3; sourceTree = "<group>"; };
-		4908D6821704AE4A00BB67DC /* TheCall.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = TheCall.mp3; path = ../../../speakerapp/public/media/TheCall.mp3; sourceTree = "<group>"; };
-		4908D6831704AE4A00BB67DC /* thirdday.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = thirdday.mp3; path = ../../../speakerapp/public/media/thirdday.mp3; sourceTree = "<group>"; };
-		4908D6841704AE4A00BB67DC /* VenusImMilo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = VenusImMilo.mp3; path = ../../../speakerapp/public/media/VenusImMilo.mp3; sourceTree = "<group>"; };
-		4908D6851704AE4A00BB67DC /* WeBelong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = WeBelong.mp3; path = ../../../speakerapp/public/media/WeBelong.mp3; sourceTree = "<group>"; };
-		4908D6861704AE4A00BB67DC /* Word.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Word.mp3; path = ../../../speakerapp/public/media/Word.mp3; sourceTree = "<group>"; };
+		49195D6A17090ADC00570332 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		49195D6B17090AF400570332 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
+		49195D6E1709125200570332 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		49195D70170912A700570332 /* JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSON.m; sourceTree = "<group>"; };
 		49330AF617049F6E00A14167 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		493DCA0C1703852E00BABFED /* quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = quotes.plist; sourceTree = "<group>"; };
 		49BD4CF41702560F007D65E1 /* SpeakerSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakerSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49195D6D17090DE700570332 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				49195D6B17090AF400570332 /* Network.m */,
+				49195D6A17090ADC00570332 /* Network.h */,
+				49195D6E1709125200570332 /* JSON.h */,
+				49195D70170912A700570332 /* JSON.m */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
 		49BD4CEB1702560E007D65E1 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +147,7 @@
 		49BD4CFD1702560F007D65E1 /* SpeakerSocial */ = {
 			isa = PBXGroup;
 			children = (
+				49195D6D17090DE700570332 /* lib */,
 				493DCA0C1703852E00BABFED /* quotes.plist */,
 				49BD4D061702560F007D65E1 /* AppDelegate.h */,
 				49BD4D071702560F007D65E1 /* AppDelegate.m */,
@@ -164,17 +163,7 @@
 		49BD4CFE1702560F007D65E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4908D67C1704AE4900BB67DC /* friday.mp3 */,
-				4908D67D1704AE4900BB67DC /* LayYourHead.mp3 */,
-				4908D67E1704AE4A00BB67DC /* LICENSE */,
-				4908D67F1704AE4A00BB67DC /* LonelyGirl.mp3 */,
 				4908D6801704AE4A00BB67DC /* Meter.mp3 */,
-				4908D6811704AE4A00BB67DC /* rainbow.mp3 */,
-				4908D6821704AE4A00BB67DC /* TheCall.mp3 */,
-				4908D6831704AE4A00BB67DC /* thirdday.mp3 */,
-				4908D6841704AE4A00BB67DC /* VenusImMilo.mp3 */,
-				4908D6851704AE4A00BB67DC /* WeBelong.mp3 */,
-				4908D6861704AE4A00BB67DC /* Word.mp3 */,
 				4908D67A1704A0D900BB67DC /* cross.mp3 */,
 				49BD4CFF1702560F007D65E1 /* SpeakerSocial-Info.plist */,
 				49BD4D001702560F007D65E1 /* InfoPlist.strings */,
@@ -285,17 +274,8 @@
 				49BD4D141702560F007D65E1 /* MainStoryboard_iPad.storyboard in Resources */,
 				493DCA0D1703852E00BABFED /* quotes.plist in Resources */,
 				4908D67B1704A0D900BB67DC /* cross.mp3 in Resources */,
-				4908D6871704AE4A00BB67DC /* friday.mp3 in Resources */,
-				4908D6881704AE4A00BB67DC /* LayYourHead.mp3 in Resources */,
-				4908D6891704AE4A00BB67DC /* LICENSE in Resources */,
-				4908D68A1704AE4A00BB67DC /* LonelyGirl.mp3 in Resources */,
 				4908D68B1704AE4A00BB67DC /* Meter.mp3 in Resources */,
-				4908D68C1704AE4A00BB67DC /* rainbow.mp3 in Resources */,
-				4908D68D1704AE4A00BB67DC /* TheCall.mp3 in Resources */,
-				4908D68E1704AE4A00BB67DC /* thirdday.mp3 in Resources */,
-				4908D68F1704AE4A00BB67DC /* VenusImMilo.mp3 in Resources */,
-				4908D6901704AE4A00BB67DC /* WeBelong.mp3 in Resources */,
-				4908D6911704AE4A00BB67DC /* Word.mp3 in Resources */,
+				49195D6F1709125200570332 /* JSON.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +313,8 @@
 				49BD4D041702560F007D65E1 /* main.m in Sources */,
 				49BD4D081702560F007D65E1 /* AppDelegate.m in Sources */,
 				49BD4D171702560F007D65E1 /* ViewController.m in Sources */,
+				49195D6C17090AF400570332 /* Network.m in Sources */,
+				49195D71170912A700570332 /* JSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
