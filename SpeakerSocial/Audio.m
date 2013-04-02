@@ -5,7 +5,6 @@
 -(void)play:(double)position{
     self.audioPlayer.volume = 1.0;
     self.audioPlayer.currentTime = position;
-        
 }
 -(void)load{
     NSURL *url = [NSURL URLWithString:@"http://chielo.herokuapp.com/media/Meter.mp3"];
@@ -19,7 +18,7 @@
         self.audioPlayer.volume = 0.0;
     }
 }
--(NSInteger)duration{
+-(double)duration{
     return self.audioPlayer.duration;
 }
 -(NSTimeInterval)currentTime{

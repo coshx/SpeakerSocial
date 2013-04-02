@@ -1,4 +1,4 @@
 @interface Network 
--(NSString*)httpGet: (NSString*)url;
--(NSString*)httpPost: (NSString*)url :(NSString*)data;
+-(NSData*)httpGet: (NSString*)url;
+-(void)httpPost: (NSString*)url :(NSString*)data;
 @end
