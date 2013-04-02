@@ -1,4 +1,3 @@
 @interface ClockSkew
-@property (strong, nonatomic)  NSNumber *clockSkew;
--(void)calculate;
+-(NSNumber*)calculate;
 @end

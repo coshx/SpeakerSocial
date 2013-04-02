@@ -5,16 +5,21 @@
 @end
 @implementation ClockSkew
 
-NSNumber *numberOfSamples;
+int numberOfSamples;
 
--(void)calculate{
-    NSMutableArray* samples;
-    NSMutableArray *respPlusSkews;
-    NSMutableArray *respMinusSkews;
+-(NSNumber*)calculate{
+    numberOfSamples = 25;
+    NSMutableArray* samples = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
+    NSMutableArray *respPlusSkews = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
+    NSMutableArray *respMinusSkews= [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
+    double sumReqPlusSkew = 0.0;
+    double sumRespMinusSkew= 0.0;
+    double avgReqPlusSkew;
+    double avgRespMinusSkew;
     const int CLIENT_REQUEST_TIME = 0;
     const int CLIENT_RESPONSE_TIME = 1;
     const int SERVER_TIME = 2;
-    numberOfSamples = [NSNumber numberWithInt:25];
+    
     samples = [self takeSamples:samples];
     
     for (NSArray *sample in samples) {
@@ -25,30 +30,33 @@ NSNumber *numberOfSamples;
         double respminusskew = [[sample objectAtIndex:CLIENT_RESPONSE_TIME ]doubleValue] - [[sample objectAtIndex:SERVER_TIME] doubleValue];
         [respMinusSkews addObject: [NSNumber numberWithDouble:respminusskew]];
     }
-    double sumReqPlusSkew = [[respPlusSkews valueForKeyPath:@"@sum.self"] doubleValue]; 
-    double sumRespMinusSkew = [[respMinusSkews valueForKeyPath:@"@sum.self"] doubleValue];
-    double avgReqPlusSkew = sumReqPlusSkew/[samples count];
-    double avgRespMinusSkew = sumRespMinusSkew/[samples count];
-    self.clockSkew = [NSNumber numberWithDouble:(avgReqPlusSkew - ((avgReqPlusSkew+avgRespMinusSkew)/2))];
-}
-
--(NSMutableArray*)takeSamples:(NSMutableArray*)sampleArray{
-    NSTimeInterval clientRequestTime = [[NSDate date] timeIntervalSince1970]*1000;
-    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/time"]];
-    NSTimeInterval clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
-    NSTimeInterval serverTime = [[songData objectForKey:@"time"] doubleValue] ;
-    NSArray* sample =[NSArray arrayWithObjects:
-                      [NSNumber numberWithDouble:clientRequestTime],
-                      [NSNumber numberWithDouble:clientResponseTime],
-                      [NSNumber numberWithDouble:serverTime], nil];
-    [sampleArray addObject:sample];
-    
-    if([NSNumber numberWithInt:[sampleArray count]] < numberOfSamples){
-        [self takeSamples:sampleArray];
+    for (NSNumber *respPlusSkew in respPlusSkews) {
+        sumReqPlusSkew+=[respPlusSkew doubleValue];
     }
-    return sampleArray;
+    for (NSNumber *respMinusSkew in respMinusSkews) {
+        sumRespMinusSkew+=[respMinusSkew doubleValue];
+    }
+    avgReqPlusSkew = sumReqPlusSkew/[samples count];
+    avgRespMinusSkew = sumRespMinusSkew/[samples count];
+    NSNumber* skew = [NSNumber numberWithDouble:(avgReqPlusSkew - ((avgReqPlusSkew+avgRespMinusSkew)/2))];
+    return skew;
 }
-
+-(NSMutableArray*)takeSamples:(NSMutableArray*)samples{
+    double clientRequestTime = [[NSDate date] timeIntervalSince1970]*1000;
+    NSDictionary* serverResponse = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/time"]];
+    double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
+    double serverTime = [[serverResponse objectForKey:@"time"] doubleValue] ;
+    NSArray* sample =[NSArray arrayWithObjects:
+                         [NSNumber numberWithDouble:clientRequestTime],
+                         [NSNumber numberWithDouble:clientResponseTime],
+                         [NSNumber numberWithDouble:serverTime],
+                      nil];
+    [samples addObject:sample];
+    if([samples count] < numberOfSamples){
+        [self takeSamples:samples];
+    }
+    return samples;
+}
 @end
 
 
