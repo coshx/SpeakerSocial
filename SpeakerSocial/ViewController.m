@@ -12,8 +12,15 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    self.activityView.frame = CGRectMake(0.0, 0.0, 35.0, 35.0);
+    self.activityView.center = self.view.center;
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
     self.clockSkew = [ClockSkew calculate];
     [self.audio = [[Audio alloc] init] load];
+    [self.activityView stopAnimating];
     
 }
 - (void)didReceiveMemoryWarning{

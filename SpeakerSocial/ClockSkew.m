@@ -46,11 +46,7 @@ int numberOfSamples;
     NSDictionary* serverResponse = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/time"]];
     double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
     double serverTime = [[serverResponse objectForKey:@"time"] doubleValue] ;
-    NSArray* sample =[NSArray arrayWithObjects:
-                         [NSNumber numberWithDouble:clientRequestTime],
-                         [NSNumber numberWithDouble:clientResponseTime],
-                         [NSNumber numberWithDouble:serverTime],
-                      nil];
+    NSArray* sample =@[ @(clientRequestTime), @(clientResponseTime), @(serverTime)]; //{}?
     [samples addObject:sample];
     if([samples count] < numberOfSamples){
         [self takeSamples:samples];
