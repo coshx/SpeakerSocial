@@ -49,8 +49,10 @@ int numberOfSamples;
     NSArray* sample =@[ @(clientRequestTime), @(clientResponseTime), @(serverTime)]; //{}?
     [samples addObject:sample];
     if([samples count] < numberOfSamples){
+     [NSThread sleepForTimeInterval:.5];
         [self takeSamples:samples];
     }
+   
     return samples;
 }
 @end
