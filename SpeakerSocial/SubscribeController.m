@@ -1,13 +1,13 @@
-#import "ViewController.h"
+#import "SubscribeController.h"
 #import "Network.h"
 #import "JSON.h"
 #import "Audio.h"
 #import "ClockSkew.h"
 
-@interface ViewController ()
+@interface SubscribeController ()
 @end
 
-@implementation ViewController
+@implementation SubscribeController
 
 dispatch_queue_t backgroundQueue;
 
@@ -15,15 +15,14 @@ dispatch_queue_t backgroundQueue;
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-   
-        
+
     self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(75, 155, 170, 250)];
     self.loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:50 alpha:0.5];
     self.loadingView.clipsToBounds = YES;
     self.loadingView.layer.cornerRadius = 10.0;
     
     self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self. activityView.frame = CGRectMake(65, 40, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
+    self.activityView.frame = CGRectMake(65, 40, self.activityView.bounds.size.width, self.activityView.bounds.size.height);
     [self.loadingView addSubview:self.activityView];
     
     self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 115, 130, 22)];
@@ -41,7 +40,6 @@ dispatch_queue_t backgroundQueue;
     
     dispatch_async(backgroundQueue, ^(void) {
         self.clockSkew = [ClockSkew calculate];
-        [self.audio = [[Audio alloc] init] load];
     });
     dispatch_async(backgroundQueue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -58,20 +56,24 @@ dispatch_queue_t backgroundQueue;
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)broadcastButtonTapped:(id)sender{
-    [Network httpPost:@"http://chielo.herokuapp.com/song_info" : @"title=Let The Meter Run&url=http://chielo.herokuapp.com/media/Meter.mp3"];
-}
-
 -(IBAction)subscribeButtonTapped:(id)sender{
       //NSArray* songTitle = [song objectForKey:@"title"];
     //NSArray* songUrl = [song objectForKey:@"url"];
     
+
     NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
+   
+    [self.audio = [[Audio alloc] init] load:[songData objectForKey:@"url"]];
+   
     double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
     double now = [[NSDate date] timeIntervalSince1970]*1000;
     double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
     double songPosition = 0.001*(now - clientStartTime);
     double songDuration = [self.audio duration];
+    
+    NSLog(@"%@",[songData objectForKey:@"title"]);
+
+    
     if(songPosition>songDuration){
         self.quoteText.text = [NSString stringWithFormat:@"Song has ended, please broadcast again"];
     }else{
@@ -79,12 +81,12 @@ dispatch_queue_t backgroundQueue;
         self.quoteText.text = [NSString stringWithFormat:@"Clock Skew: %@", self.clockSkew];
     }
    // [self.audio mute];
-    
 }
 
--(IBAction)pauseButtonTapped:(id)sender{
-    [self.audio mute];
-}
+-(IBAction)selectSongToBroadcast:(id)sender{
+    }
 
+-(IBAction)returned:(UIStoryboardSegue *)segue {
+}
 
 @end

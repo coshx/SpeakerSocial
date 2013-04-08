@@ -1,10 +1,8 @@
 #import <UIKit/UIKit.h>
 #import <dispatch/dispatch.h>
-
-#import "QuartzCore/QuartzCore.h"
-
 #import "Audio.h"
-@interface ViewController : UIViewController
+
+@interface SubscribeController : UIViewController
 @property (nonatomic, strong) IBOutlet UITextView *quoteText;
 @property (strong, nonatomic) Audio* audio;
 @property (strong, nonatomic) NSNumber* clockSkew;
@@ -13,8 +11,7 @@
 @property  (strong, nonatomic)  UILabel *loadingLabel;
 
 - (IBAction)subscribeButtonTapped:(id)sender;
-- (IBAction)broadcastButtonTapped:(id)sender;
-- (IBAction)pauseButtonTapped:(id)sender;
+- (IBAction)selectSongToBroadcast:(id)sender;
 
 
 @end

@@ -6,8 +6,8 @@
     self.audioPlayer.volume = 1.0;
     self.audioPlayer.currentTime = position;
 }
--(void)load{
-    NSURL *url = [NSURL URLWithString:@"http://chielo.herokuapp.com/media/Meter.mp3"];
+-(void)load:(NSString*)urlString{
+    NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [NSData dataWithContentsOfURL:url];
     self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
 	self.audioPlayer.numberOfLoops = 1;
