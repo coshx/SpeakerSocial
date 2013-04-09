@@ -15,7 +15,7 @@ dispatch_queue_t backgroundQueue;
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-
+    
     self.loadingView = [[UIView alloc] initWithFrame:CGRectMake(75, 155, 170, 250)];
     self.loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:50 alpha:0.5];
     self.loadingView.clipsToBounds = YES;
@@ -48,6 +48,7 @@ dispatch_queue_t backgroundQueue;
         });
         NSLog(@"%@",@"Loading Complete");
     });
+    
 
 }
 
@@ -72,7 +73,6 @@ dispatch_queue_t backgroundQueue;
     double songDuration = [self.audio duration];
     
     NSLog(@"%@",[songData objectForKey:@"title"]);
-
     
     if(songPosition>songDuration){
         self.quoteText.text = [NSString stringWithFormat:@"Song has ended, please broadcast again"];

@@ -8,7 +8,7 @@
 int numberOfSamples;
 
 -(NSNumber*)calculate{
-    numberOfSamples = 10;
+    numberOfSamples = 25;
     NSMutableArray* samples = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
     NSMutableArray *respPlusSkews = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
     NSMutableArray *respMinusSkews= [[NSMutableArray alloc] initWithCapacity:numberOfSamples];

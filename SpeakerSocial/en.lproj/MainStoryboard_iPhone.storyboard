@@ -137,7 +137,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="broadcastButtonTapped:" destination="r3t-hv-c4D" eventType="touchUpInside" id="3Cf-6E-ff3"/>
+                                    <action selector="broadcastButtonTapped:" destination="r3t-hv-c4D" eventType="touchUpInside" id="8r4-rL-JZV"/>
                                     <segue destination="kmp-LL-MYD" kind="unwind" unwindAction="returned:" id="LJE-Cp-kI1"/>
                                 </connections>
                             </button>
@@ -151,7 +151,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="statusText" destination="Uen-7Z-nsk" id="QEK-Pi-7l9"/>
+                        <outlet property="statusText" destination="Uen-7Z-nsk" id="Qsu-SS-Ji3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMw-A7-3QB" userLabel="First Responder" sceneMemberID="firstResponder"/>
