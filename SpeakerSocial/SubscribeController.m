@@ -26,6 +26,8 @@ dispatch_queue_t backgroundQueue;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.progressBar stopAnimating];
             [self.activityView removeFromSuperview];
+            self.quoteText.text = [NSString stringWithFormat:@"Clock Skew: %@", self.clockSkew];
+            
             NSLog(@"%@",@"Syncing Complete");
         });
     });
@@ -59,7 +61,6 @@ dispatch_queue_t backgroundQueue;
         [self.audio play:songPosition];
         NSLog(@"%@",self.quoteText.text );
         
-        self.quoteText.text = [NSString stringWithFormat:@"Clock Skew: %@", self.clockSkew];
         NSLog(@"%@",[songData objectForKey:@"title"]);
         
     }

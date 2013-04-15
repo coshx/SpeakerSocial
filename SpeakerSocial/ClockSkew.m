@@ -5,22 +5,71 @@
 @end
 @implementation ClockSkew
 
-int numberOfSamples;
+const int numberOfSamples = 10 ;
+const int CLIENT_REQUEST_TIME = 0;
+const int CLIENT_RESPONSE_TIME = 1;
+const int SERVER_TIME = 2;
+const int ROUND_TRIP = 3;
 
 -(NSNumber*)calculate{
-    numberOfSamples = 10;
     NSMutableArray* samples = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
+    samples = [self takeSamples:samples];
+    NSArray* bestSample = [self getSampleWithMinRoundTrip:samples];
+    double roundTrip = [self roundTrip:bestSample];
+    double reqPlusSkew = [[bestSample objectAtIndex:SERVER_TIME] doubleValue] - [[bestSample objectAtIndex:CLIENT_REQUEST_TIME] doubleValue];
+    NSNumber* skew = [NSNumber numberWithDouble:(reqPlusSkew - (roundTrip/2))];
+   
+    NSLog(@"%@",skew);
+    NSLog(@"%@",[self avgCalculate:samples]);
+    
+    return skew;
+}
+
+-(NSMutableArray*)takeSamples:(NSMutableArray*)samples{
+    double clientRequestTime = [[NSDate date] timeIntervalSince1970]*1000;
+    NSDictionary* serverResponse = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/time"]];
+    double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
+    double serverTime = [[serverResponse objectForKey:@"time"] doubleValue] ;
+    double roundTrip = clientResponseTime - clientRequestTime;
+    NSArray* sample =@[ @(clientRequestTime), @(clientResponseTime), @(serverTime), @(roundTrip)]; //{}?
+    [samples addObject:sample];
+    if([samples count] < numberOfSamples){
+     [NSThread sleepForTimeInterval:.1];
+        [self takeSamples:samples];
+    }
+    return samples;
+}
+
+-(NSArray*)getSampleWithMinRoundTrip:(NSMutableArray*)samples{
+    
+    NSArray* minRoundTripSample = [NSMutableArray alloc] ;
+    double minRoundTrip = [self roundTrip:[samples objectAtIndex:0]];
+    double thisRoundTrip;
+    
+    for (NSArray *sample in samples) {
+        thisRoundTrip = [self roundTrip:sample];
+        if (abs(thisRoundTrip)<abs(minRoundTrip)){
+            minRoundTripSample = sample ;
+            minRoundTrip = thisRoundTrip;
+        }
+    }
+
+    return minRoundTripSample;
+}
+
+-(double)roundTrip:(NSArray*)sample{
+    double respMinusSkew = [[sample objectAtIndex:CLIENT_RESPONSE_TIME ] doubleValue] - [[sample objectAtIndex:SERVER_TIME] doubleValue];
+    double reqPlusSkew = [[sample objectAtIndex:SERVER_TIME] doubleValue] - [[sample objectAtIndex:CLIENT_REQUEST_TIME] doubleValue];
+    return reqPlusSkew+respMinusSkew;
+}
+
+-(NSNumber*)avgCalculate:(NSMutableArray*)samples{
     NSMutableArray *respPlusSkews = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
     NSMutableArray *respMinusSkews= [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
     double sumReqPlusSkew = 0.0;
     double sumRespMinusSkew= 0.0;
     double avgReqPlusSkew;
     double avgRespMinusSkew;
-    const int CLIENT_REQUEST_TIME = 0;
-    const int CLIENT_RESPONSE_TIME = 1;
-    const int SERVER_TIME = 2;
-    
-    samples = [self takeSamples:samples];
     
     for (NSArray *sample in samples) {
         double reqplusskew = [[sample objectAtIndex:SERVER_TIME] doubleValue] - [[sample objectAtIndex:CLIENT_REQUEST_TIME] doubleValue];
@@ -41,20 +90,8 @@ int numberOfSamples;
     NSNumber* skew = [NSNumber numberWithDouble:(avgReqPlusSkew - ((avgReqPlusSkew+avgRespMinusSkew)/2))];
     return skew;
 }
--(NSMutableArray*)takeSamples:(NSMutableArray*)samples{
-    double clientRequestTime = [[NSDate date] timeIntervalSince1970]*1000;
-    NSDictionary* serverResponse = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/time"]];
-    double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
-    double serverTime = [[serverResponse objectForKey:@"time"] doubleValue] ;
-    NSArray* sample =@[ @(clientRequestTime), @(clientResponseTime), @(serverTime)]; //{}?
-    [samples addObject:sample];
-    if([samples count] < numberOfSamples){
-     [NSThread sleepForTimeInterval:.5];
-        [self takeSamples:samples];
-    }
-   
-    return samples;
-}
+
+
 @end
 
 
