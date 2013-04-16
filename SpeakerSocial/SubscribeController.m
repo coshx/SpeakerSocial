@@ -27,7 +27,6 @@ dispatch_queue_t backgroundQueue;
             [self.progressBar stopAnimating];
             [self.activityView removeFromSuperview];
             self.quoteText.text = [NSString stringWithFormat:@"Clock Skew: %@", self.clockSkew];
-            
             NSLog(@"%@",@"Syncing Complete");
         });
     });
@@ -41,7 +40,7 @@ dispatch_queue_t backgroundQueue;
 }
 
 -(IBAction)subscribeButtonTapped:(id)sender{
-      //NSArray* songTitle = [song objectForKey:@"title"];
+    //NSArray* songTitle = [song objectForKey:@"title"];
     //NSArray* songUrl = [song objectForKey:@"url"];
     
     NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
@@ -49,22 +48,9 @@ dispatch_queue_t backgroundQueue;
     [self.audio = [[Audio alloc] init] load:[songData objectForKey:@"url"]];
    
     double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
-    double now = [[NSDate date] timeIntervalSince1970]*1000;
     double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
-    double songPosition = 0.001*(now - clientStartTime);
-    double songDuration = [self.audio duration];
-    
-    
-    if(songPosition>songDuration){
-        self.quoteText.text = [NSString stringWithFormat:@"Song has ended, please broadcast again"];
-    }else{
-        [self.audio play:songPosition];
-        NSLog(@"%@",self.quoteText.text );
-        
-        NSLog(@"%@",[songData objectForKey:@"title"]);
-        
-    }
-   // [self.audio mute];
+    [self.audio play:clientStartTime];
+
 }
 
 -(IBAction)selectSongToBroadcast:(id)sender{
