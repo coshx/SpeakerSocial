@@ -5,7 +5,7 @@
 @end
 @implementation ClockSkew
 
-const int numberOfSamples = 25 ;
+const int numberOfSamples = 15 ;
 const int CLIENT_REQUEST_TIME = 0;
 const int CLIENT_RESPONSE_TIME = 1;
 const int SERVER_TIME = 2;

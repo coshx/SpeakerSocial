@@ -20,9 +20,9 @@ dispatch_queue_t bgLoadAudio;
     bgMonitor = dispatch_queue_create("com.coshx.speakersocial.monitorClock", NULL);
     [self monitorClock];
     [self syncClock];
-    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
-    self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(resync)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -40,6 +40,14 @@ dispatch_queue_t bgLoadAudio;
     self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
 }
 
+-(void)resync{
+    [self syncClock];
+    if(self.audio.playing){
+        [self loadAudio];
+    }
+
+}
+
 -(void)monitorClock{
     dispatch_async(bgMonitor, ^(void) {
         NSLog(@"%f", [ClockSkew monitorClock]);
@@ -50,7 +58,9 @@ dispatch_queue_t bgLoadAudio;
             NSLog(@"-- resyncing --");
             [self syncClock];
             if(self.audio.playing){
-                //[self loadAudio];
+                [self loadAudio];
+                [self monitorClock];
+                
             }
         });
     });
