@@ -5,7 +5,7 @@
 @end
 @implementation ClockSkew
 
-const int numberOfSamples = 10 ;
+const int numberOfSamples = 25 ;
 const int CLIENT_REQUEST_TIME = 0;
 const int CLIENT_RESPONSE_TIME = 1;
 const int SERVER_TIME = 2;
@@ -16,12 +16,9 @@ const int ROUND_TRIP = 3;
     samples = [self takeSamples:samples];
     NSArray* bestSample = [self getSampleWithMinRoundTrip:samples];
     double roundTrip = [self roundTrip:bestSample];
+    NSLog(@"best roundTrip:%f",roundTrip);
     double reqPlusSkew = [[bestSample objectAtIndex:SERVER_TIME] doubleValue] - [[bestSample objectAtIndex:CLIENT_REQUEST_TIME] doubleValue];
     NSNumber* skew = [NSNumber numberWithDouble:(reqPlusSkew - (roundTrip/2))];
-   
-    NSLog(@"%@",skew);
-    NSLog(@"%@",[self avgCalculate:samples]);
-    
     return skew;
 }
 
@@ -63,34 +60,16 @@ const int ROUND_TRIP = 3;
     return reqPlusSkew+respMinusSkew;
 }
 
--(NSNumber*)avgCalculate:(NSMutableArray*)samples{
-    NSMutableArray *respPlusSkews = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
-    NSMutableArray *respMinusSkews= [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
-    double sumReqPlusSkew = 0.0;
-    double sumRespMinusSkew= 0.0;
-    double avgReqPlusSkew;
-    double avgRespMinusSkew;
-    
-    for (NSArray *sample in samples) {
-        double reqplusskew = [[sample objectAtIndex:SERVER_TIME] doubleValue] - [[sample objectAtIndex:CLIENT_REQUEST_TIME] doubleValue];
-        [respPlusSkews addObject: [NSNumber numberWithDouble:reqplusskew]];
+-(double)monitorClock{
+    while(true){
+        double start_time = [[NSDate date] timeIntervalSince1970]*1000 ;
+        [NSThread sleepForTimeInterval:1];
+        double current_time = [[NSDate date] timeIntervalSince1970]*1000 ;
+        if(current_time - start_time < 950 || current_time - start_time>1010){
+            return current_time - start_time;
+        }
     }
-    for (NSArray *sample in samples) {
-        double respminusskew = [[sample objectAtIndex:CLIENT_RESPONSE_TIME ]doubleValue] - [[sample objectAtIndex:SERVER_TIME] doubleValue];
-        [respMinusSkews addObject: [NSNumber numberWithDouble:respminusskew]];
-    }
-    for (NSNumber *respPlusSkew in respPlusSkews) {
-        sumReqPlusSkew+=[respPlusSkew doubleValue];
-    }
-    for (NSNumber *respMinusSkew in respMinusSkews) {
-        sumRespMinusSkew+=[respMinusSkew doubleValue];
-    }
-    avgReqPlusSkew = sumReqPlusSkew/[samples count];
-    avgRespMinusSkew = sumRespMinusSkew/[samples count];
-    NSNumber* skew = [NSNumber numberWithDouble:(avgReqPlusSkew - ((avgReqPlusSkew+avgRespMinusSkew)/2))];
-    return skew;
 }
-
 
 @end
 

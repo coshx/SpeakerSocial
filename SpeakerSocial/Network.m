@@ -18,4 +18,18 @@
     NSError *err = nil;
     [NSURLConnection sendSynchronousRequest: theRequest returningResponse: &resp error: &err];
 }
+
+
+-(void)httpASyncPost: (NSString*)url :(NSString*)data{
+    NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [theRequest setHTTPMethod:@"POST"];
+    [theRequest setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [NSURLConnection sendAsynchronousRequest:theRequest queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+         //[self didLoadData:data];
+         
+     }];
+}
+
 @end

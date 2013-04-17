@@ -6,4 +6,5 @@
 - (double)duration;
 - (NSTimeInterval)currentTime;
 - (void)mute;
+-(BOOL)playing;
 @end

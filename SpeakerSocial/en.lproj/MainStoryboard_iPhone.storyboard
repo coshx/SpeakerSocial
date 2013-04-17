@@ -169,7 +169,7 @@
                                 </state>
                                 <connections>
                                     <action selector="broadcastButtonTapped:" destination="r3t-hv-c4D" eventType="touchUpInside" id="8r4-rL-JZV"/>
-                                    <segue destination="kmp-LL-MYD" kind="unwind" unwindAction="returned:" id="LJE-Cp-kI1"/>
+                                    <segue destination="kmp-LL-MYD" kind="unwind" unwindAction="returned:" id="kdQ-Jm-e7C"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -191,6 +191,35 @@
             <point key="canvasLocation" x="891" y="114"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="BroadcastController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BroadcastController.h"/>
+            <relationships>
+                <relationship kind="action" name="broadcastButtonTapped:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="statusText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SubscribeController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SubscribeController.h"/>
+            <relationships>
+                <relationship kind="action" name="selectSongToBroadcast:"/>
+                <relationship kind="action" name="subscribeButtonTapped:"/>
+                <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="progressBar" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="quoteText" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="WebViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="viewWeb" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

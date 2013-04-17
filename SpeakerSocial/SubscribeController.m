@@ -9,54 +9,92 @@
 
 @implementation SubscribeController
 
-dispatch_queue_t backgroundQueue;
-
+dispatch_queue_t bgMonitor; 
+dispatch_queue_t bgSync;
+dispatch_queue_t bgLoadAudio;
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-	 
-    [self.progressBar startAnimating];
-  
-    backgroundQueue = dispatch_queue_create("com.coshx.speakersocial.bgqueue", NULL);
+    bgLoadAudio = dispatch_queue_create("com.coshx.speakersocial.loadAudio", NULL);
+    bgSync = dispatch_queue_create("com.coshx.speakersocial.syncClock", NULL);
+    bgMonitor = dispatch_queue_create("com.coshx.speakersocial.monitorClock", NULL);
+    [self monitorClock];
+    [self syncClock];
+    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
+    self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
     
-    dispatch_async(backgroundQueue, ^(void) {
-        self.clockSkew = [ClockSkew calculate];
-    });
-    dispatch_async(backgroundQueue, ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.progressBar stopAnimating];
-            [self.activityView removeFromSuperview];
-            self.quoteText.text = [NSString stringWithFormat:@"Clock Skew: %@", self.clockSkew];
-            NSLog(@"%@",@"Syncing Complete");
-        });
-    });
-    
-
 }
-
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(IBAction)subscribeButtonTapped:(id)sender{
-    //NSArray* songTitle = [song objectForKey:@"title"];
-    //NSArray* songUrl = [song objectForKey:@"url"];
-    
-    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
-   
-    [self.audio = [[Audio alloc] init] load:[songData objectForKey:@"url"]];
-   
-    double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
-    double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
-    [self.audio play:clientStartTime];
-
+    [self loadAudio];
 }
 
 -(IBAction)selectSongToBroadcast:(id)sender{
 }
 
 -(IBAction)returned:(UIStoryboardSegue *)segue {
+    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
+    self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
 }
+
+-(void)monitorClock{
+    dispatch_async(bgMonitor, ^(void) {
+        NSLog(@"%f", [ClockSkew monitorClock]);
+    });
+    dispatch_async(bgMonitor, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"********LOST SYNC******");
+            NSLog(@"-- resyncing --");
+            [self syncClock];
+            if(self.audio.playing){
+                //[self loadAudio];
+            }
+        });
+    });
+}
+
+-(void)syncClock{
+    [self.progressBar startAnimating];
+    dispatch_async(bgSync, ^(void) {
+        self.clockSkew = [ClockSkew calculate];
+    });
+    dispatch_async(bgSync, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityView removeFromSuperview];
+            [self.progressBar stopAnimating];
+            NSLog(@"Syncing Complete - Skew: %@",self.clockSkew);
+        });
+    });
+}
+
+-(void)loadAudio{
+    
+    [[self view] addSubview:self.progressBar];
+    self.progressBar.center = self.view.center;
+    [self.progressBar startAnimating];
+    
+    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
+    self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
+
+    double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
+    double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
+    
+    dispatch_async(bgLoadAudio, ^(void) {
+        [self.audio = [[Audio alloc] init] load:[songData objectForKey:@"url"]];
+    });
+    
+    dispatch_async(bgLoadAudio, ^{
+       dispatch_async(dispatch_get_main_queue(), ^{
+            [self.progressBar stopAnimating];
+            [self.progressBar removeFromSuperview];
+            [self.audio play:clientStartTime];
+        });
+   });
+
+    
+   }
 
 @end
