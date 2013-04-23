@@ -11,6 +11,8 @@
 		49195D6F1709125200570332 /* JSON.h in Resources */ = {isa = PBXBuildFile; fileRef = 49195D6E1709125200570332 /* JSON.h */; };
 		49195D71170912A700570332 /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 49195D70170912A700570332 /* JSON.m */; };
 		49330AF717049F6E00A14167 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49330AF617049F6E00A14167 /* AVFoundation.framework */; };
+		49476001172705190055EDB3 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49475FFD172705190055EDB3 /* libTestFlight.a */; };
+		494760051727058C0055EDB3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 494760041727058C0055EDB3 /* libz.dylib */; };
 		49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF71702560F007D65E1 /* UIKit.framework */; };
 		49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CF91702560F007D65E1 /* Foundation.framework */; };
 		49BD4CFC1702560F007D65E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49BD4CFB1702560F007D65E1 /* CoreGraphics.framework */; };
@@ -50,6 +52,9 @@
 		49195D6E1709125200570332 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		49195D70170912A700570332 /* JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSON.m; sourceTree = "<group>"; };
 		49330AF617049F6E00A14167 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		49475FFD172705190055EDB3 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTestFlight.a; path = TestFlightSDK1.2.4/libTestFlight.a; sourceTree = SOURCE_ROOT; };
+		49476000172705190055EDB3 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestFlight.h; path = TestFlightSDK1.2.4/TestFlight.h; sourceTree = SOURCE_ROOT; };
+		494760041727058C0055EDB3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		49BD4CF41702560F007D65E1 /* SpeakerSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakerSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49BD4CF71702560F007D65E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		49BD4CF91702560F007D65E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,10 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494760051727058C0055EDB3 /* libz.dylib in Frameworks */,
 				49330AF717049F6E00A14167 /* AVFoundation.framework in Frameworks */,
 				49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */,
 				49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */,
 				49BD4CFC1702560F007D65E1 /* CoreGraphics.framework in Frameworks */,
+				49476001172705190055EDB3 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +177,9 @@
 		49BD4CFE1702560F007D65E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				494760041727058C0055EDB3 /* libz.dylib */,
+				49475FFD172705190055EDB3 /* libTestFlight.a */,
+				49476000172705190055EDB3 /* TestFlight.h */,
 				49BD4CFF1702560F007D65E1 /* SpeakerSocial-Info.plist */,
 				49BD4D001702560F007D65E1 /* InfoPlist.strings */,
 				49BD4D031702560F007D65E1 /* main.m */,
@@ -232,6 +242,7 @@
 				49BD4CF01702560F007D65E1 /* Sources */,
 				49BD4CF11702560F007D65E1 /* Frameworks */,
 				49BD4CF21702560F007D65E1 /* Resources */,
+				4947600617270F930055EDB3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -314,6 +325,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4947600617270F930055EDB3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
 		49BD4D1B1702560F007D65E1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -464,6 +488,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpeakerSocial/SpeakerSocial-Prefix.pch";
 				INFOPLIST_FILE = "SpeakerSocial/SpeakerSocial-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.4\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -472,9 +500,14 @@
 		49BD4D311702560F007D65E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpeakerSocial/SpeakerSocial-Prefix.pch";
 				INFOPLIST_FILE = "SpeakerSocial/SpeakerSocial-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.4\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
