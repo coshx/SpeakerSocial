@@ -14,6 +14,10 @@ dispatch_queue_t bgMonitor;
 dispatch_queue_t bgSync;
 dispatch_queue_t bgLoadAudio;
 
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     bgLoadAudio = dispatch_queue_create("com.coshx.speakersocial.loadAudio", NULL);
@@ -25,16 +29,14 @@ dispatch_queue_t bgLoadAudio;
                                              selector:@selector(resync)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
 }
-- (void)didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
+
+-(IBAction)selectSongToBroadcast:(id)sender{
 }
 
 -(IBAction)subscribeButtonTapped:(id)sender{
     [self loadAudio];
 }
 
--(IBAction)selectSongToBroadcast:(id)sender{
-}
 
 -(IBAction)returned:(UIStoryboardSegue *)segue {
     NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
@@ -60,9 +62,8 @@ dispatch_queue_t bgLoadAudio;
             [self syncClock];
             if(self.audio.playing){
                 [self loadAudio];
-                [self monitorClock];
-                
             }
+            [self monitorClock];
         });
     });
 }
