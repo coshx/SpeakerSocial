@@ -3,6 +3,7 @@
 #import "JSON.h"
 #import "Audio.h"
 #import "ClockSkew.h"
+#import "GData.h"
 
 @interface SubscribeController ()
 @end
