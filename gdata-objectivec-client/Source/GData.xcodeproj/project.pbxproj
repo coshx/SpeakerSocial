@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49E412D317297C3900B0F61E /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1C6E0F1027B3CE00B46459 /* libGDataTouchStaticLib.a */; };
 		4F00C37C1355026B00DEC154 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3791355026B00DEC154 /* GTMOAuth2Authentication.m */; };
 		4F00C37D1355026B00DEC154 /* GTMOAuth2SignIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C37B1355026B00DEC154 /* GTMOAuth2SignIn.m */; };
 		4F00C37E1355026B00DEC154 /* GTMOAuth2Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3791355026B00DEC154 /* GTMOAuth2Authentication.m */; };
@@ -2156,6 +2157,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		49E412D117297C2000B0F61E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F1C6E0E1027B3CE00B46459;
+			remoteInfo = GDataTouchStaticLib;
+		};
 		4F1AD9040B71604300DC0485 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
@@ -3214,6 +3222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E412D317297C3900B0F61E /* libGDataTouchStaticLib.a in Frameworks */,
 				4F18174F1134982E009F7FD1 /* Security.framework in Frameworks */,
 				4F35D4B4117787F600BDFA97 /* SystemConfiguration.framework in Frameworks */,
 			);
@@ -4702,6 +4711,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				49E412D217297C2000B0F61E /* PBXTargetDependency */,
 			);
 			name = GDataFramework;
 			productName = GDataFramework;
@@ -6355,6 +6365,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		49E412D217297C2000B0F61E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F1C6E0E1027B3CE00B46459 /* GDataTouchStaticLib */;
+			targetProxy = 49E412D117297C2000B0F61E /* PBXContainerItemProxy */;
+		};
 		4F1AD9050B71604300DC0485 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4F38F6A50B66E91D00B24B81 /* GDataFramework */;
@@ -6383,6 +6398,8 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				OTHER_CFLAGS = "-DDEBUG=1";
+				OTHER_LDFLAGS = "";
+				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Werror",
@@ -6413,6 +6430,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = (
 					"-Wall",
 					"-Werror",
@@ -6524,7 +6544,7 @@
 					"$(inherited)",
 					"-DGDATA_IPHONE=1",
 					"-DGDATA_REQUIRE_SERVICE_INCLUDES=1",
-					"-DGDATA_INCLUDE_nameServiceHere_SERVICE=1",
+					"-DGDATA_INCLUDE_YOUTUBE_SERVICE=1",
 				);
 				PRODUCT_NAME = GDataTouchStaticLib;
 				SDKROOT = iphoneos;

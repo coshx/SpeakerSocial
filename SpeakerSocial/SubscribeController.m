@@ -24,13 +24,9 @@ dispatch_queue_t bgLoadAudio;
     bgSync = dispatch_queue_create("com.coshx.speakersocial.syncClock", NULL);
     bgMonitor = dispatch_queue_create("com.coshx.speakersocial.monitorClock", NULL);
     [self monitorClock];
-   
-    NSLog(@"\nimplementation SubscribeController - viewDidLoad ");
-    
     [self syncClock];
-        
     
-   [[NSNotificationCenter defaultCenter] addObserver:self
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(resync)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
 }
@@ -51,8 +47,8 @@ dispatch_queue_t bgLoadAudio;
         return ;
     }
     
-    NSDictionary* songData = [JSON parse:response ];
-    self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
+    [self loadAudio];
+
 }
 
 -(void)resync{
@@ -71,6 +67,7 @@ dispatch_queue_t bgLoadAudio;
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"********LOST SYNC******");
             NSLog(@"-- resyncing --");
+            self.quoteText.text = @"resyncing...";
             [self syncClock];
             if(self.audio.playing){
                 [self loadAudio];
