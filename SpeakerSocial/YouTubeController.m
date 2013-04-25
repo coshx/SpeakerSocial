@@ -6,10 +6,32 @@
 
 @implementation YouTubeController
 
+NSArray *tableData;
+
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.service  = [[GDataServiceGoogleYouTube alloc] init];
-    [self search];
+     tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    
+    //[self search];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.tableData.entries count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    cell.textLabel.text = [self.tableData.entries objectAtIndex:indexPath.row];
+    return cell;
 }
 
 -(void)search{
@@ -23,10 +45,11 @@
 }
 
 - (void)searchCallback:(GDataServiceTicket *)ticket finishedWithFeed:(GDataFeedBase *)feed error:(NSError *)error {
+    self.tableData = feed ;
     
-    self.returnTicket = ticket ;
     for (GDataEntryBase *entry in feed) {
         NSLog(@"Title: %@", [[entry title] stringValue]);
+        
     }
 }
 

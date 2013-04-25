@@ -14,6 +14,7 @@ const int ROUND_TRIP = 3;
 -(NSNumber*)calculate{
     NSMutableArray* samples = [[NSMutableArray alloc] initWithCapacity:numberOfSamples];
     samples = [self takeSamples:samples];
+    if(samples == NULL) return NULL;
     NSArray* bestSample = [self getSampleWithMinRoundTrip:samples];
     double roundTrip = [self roundTrip:bestSample];
     NSLog(@"best roundTrip:%f",roundTrip);
@@ -24,16 +25,20 @@ const int ROUND_TRIP = 3;
 
 -(NSMutableArray*)takeSamples:(NSMutableArray*)samples{
     double clientRequestTime = [[NSDate date] timeIntervalSince1970]*1000;
-    NSDictionary* serverResponse = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/time"]];
+    NSData* response = [Network httpGet:@"http://chielo.herokuapp.com/time"];
+    if(response == NULL) return NULL;
+    NSDictionary*  serverResponse = [JSON parse:response];
     double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
     double serverTime = [[serverResponse objectForKey:@"time"] doubleValue] ;
     double roundTrip = clientResponseTime - clientRequestTime;
+    
     NSArray* sample =@[ @(clientRequestTime), @(clientResponseTime), @(serverTime), @(roundTrip)]; //{}?
     [samples addObject:sample];
     if([samples count] < numberOfSamples){
      [NSThread sleepForTimeInterval:.1];
         [self takeSamples:samples];
     }
+    
     return samples;
 }
 

@@ -8,22 +8,27 @@
     NSError *err = nil;
     NSData *response = [NSURLConnection sendSynchronousRequest: theRequest returningResponse: &resp error: &err];
     //NSString * response_string = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+    NSLog(@"/nimplementation Network - httpGet");
     return response;
 }
--(void)httpPost: (NSString*)url :(NSString*)data{
+
+-(void)httpPost: (NSString*)url :(NSString*)data1{
+
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [theRequest setHTTPMethod:@"POST"];
-    [theRequest setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
+    [theRequest setHTTPBody:[data1 dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLResponse *resp = nil;
     NSError *err = nil;
+  
     [NSURLConnection sendSynchronousRequest: theRequest returningResponse: &resp error: &err];
+    
 }
 
 
--(void)httpASyncPost: (NSString*)url :(NSString*)data{
+-(void)httpASyncPost: (NSString*)url :(NSString*)data2{
     NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [theRequest setHTTPMethod:@"POST"];
-    [theRequest setHTTPBody:[data dataUsingEncoding:NSUTF8StringEncoding]];
+    [theRequest setHTTPBody:[data2 dataUsingEncoding:NSUTF8StringEncoding]];
 
     [NSURLConnection sendAsynchronousRequest:theRequest queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){

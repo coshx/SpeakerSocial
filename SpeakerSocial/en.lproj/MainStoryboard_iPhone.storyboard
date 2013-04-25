@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="GB8-IE-pyA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -110,15 +110,52 @@
                     <view key="view" contentMode="scaleToFill" id="58A-6W-cWg">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkB-v1-cyf">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="YnY-6R-Rri"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dc8-Bz-1e4">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="326" id="BCl-So-HE6"/>
+                                    <constraint firstAttribute="height" constant="392" id="CVG-i7-5FV"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="Ba6-Jy-RmF">
+                                        <rect key="frame" x="0.0" y="22" width="326" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="326" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GB8-IE-pyA" id="dme-pF-COc"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xkB-v1-cyf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="R1R-v7-GyX"/>
+                            <constraint firstItem="xkB-v1-cyf" firstAttribute="top" secondItem="58A-6W-cWg" secondAttribute="top" constant="20" symbolic="YES" type="default" id="fQB-Hl-0RT"/>
+                            <constraint firstItem="dc8-Bz-1e4" firstAttribute="bottom" secondItem="58A-6W-cWg" secondAttribute="bottom" type="default" id="ij0-Vh-GKB"/>
+                            <constraint firstItem="dc8-Bz-1e4" firstAttribute="leading" secondItem="58A-6W-cWg" secondAttribute="leading" type="default" id="o2o-5P-hUF"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="dc8-Bz-1e4" id="dWj-NA-Fvd"/>
                         <outlet property="view" destination="58A-6W-cWg" id="Upc-Zx-2hq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtV-Sh-xbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="-457"/>
+            <point key="canvasLocation" x="611" y="-491"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="n4J-cJ-SNh">
@@ -222,7 +259,6 @@
         <class className="SubscribeController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SubscribeController.h"/>
             <relationships>
-                <relationship kind="action" name="returned:" candidateClass="UIStoryboardSegue"/>
                 <relationship kind="action" name="selectSongToBroadcast:"/>
                 <relationship kind="action" name="subscribeButtonTapped:"/>
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
@@ -230,13 +266,16 @@
                 <relationship kind="outlet" name="quoteText" candidateClass="UITextView"/>
             </relationships>
         </class>
-        <class className="UIStoryboardSegue" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIStoryboardSegue.h"/>
-        </class>
         <class className="WebViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="viewWeb" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="YouTubeController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/YouTubeController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
     </classes>

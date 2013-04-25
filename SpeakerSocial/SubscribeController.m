@@ -24,8 +24,13 @@ dispatch_queue_t bgLoadAudio;
     bgSync = dispatch_queue_create("com.coshx.speakersocial.syncClock", NULL);
     bgMonitor = dispatch_queue_create("com.coshx.speakersocial.monitorClock", NULL);
     [self monitorClock];
+   
+    NSLog(@"\nimplementation SubscribeController - viewDidLoad ");
+    
     [self syncClock];
-    [[NSNotificationCenter defaultCenter] addObserver:self
+        
+    
+   [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(resync)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
 }
@@ -39,7 +44,14 @@ dispatch_queue_t bgLoadAudio;
 
 
 -(IBAction)returned:(UIStoryboardSegue *)segue {
-    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
+    NSData *response = [Network httpGet:@"http://chielo.herokuapp.com/song_info"];
+    
+    if(response == NULL){
+        self.quoteText.text = @"Connectivity problem... please try again later.";
+        return ;
+    }
+    
+    NSDictionary* songData = [JSON parse:response ];
     self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
 }
 
@@ -75,9 +87,16 @@ dispatch_queue_t bgLoadAudio;
     });
     dispatch_async(bgSync, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityView removeFromSuperview];
-            [self.progressBar stopAnimating];
-            NSLog(@"Syncing Complete - Skew: %@",self.clockSkew);
+            if(self.clockSkew==NULL){
+                self.quoteText.text = @"Connectivity problem...";
+                [NSThread sleepForTimeInterval:1];
+                [self syncClock];
+            }else{
+                self.quoteText.text = @"";
+                [self.activityView removeFromSuperview];
+                [self.progressBar stopAnimating];
+                NSLog(@"Syncing Complete - Skew: %@",self.clockSkew);
+            }
         });
     });
 }
@@ -88,9 +107,17 @@ dispatch_queue_t bgLoadAudio;
     self.progressBar.center = self.view.center;
     [self.progressBar startAnimating];
     
-    NSDictionary* songData = [JSON parse: [Network httpGet:@"http://chielo.herokuapp.com/song_info"]];
+    NSData* response = [Network httpGet:@"http://chielo.herokuapp.com/song_info"];
+    if(response == NULL){
+        self.quoteText.text = @"Connectivity problem...";
+        [self.progressBar stopAnimating];
+        [self.progressBar removeFromSuperview];
+        return;
+    };
+    
+    NSDictionary* songData = [JSON parse: response];
     self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
-
+    
     double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
     double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
     
