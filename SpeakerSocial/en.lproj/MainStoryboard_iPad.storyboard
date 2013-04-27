@@ -171,10 +171,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="d7r-MS-RaS" secondAttribute="bottom" constant="250" id="3Uf-YE-Wzb"/>
                             <constraint firstItem="ZGX-v3-6qx" firstAttribute="top" secondItem="f7I-LQ-gJ1" secondAttribute="top" constant="84" id="7hJ-0I-rDo"/>
-                            <constraint firstItem="d7r-MS-RaS" firstAttribute="centerX" secondItem="f7I-LQ-gJ1" secondAttribute="centerX" type="default" id="MLM-0o-ixQ"/>
-                            <constraint firstItem="d7r-MS-RaS" firstAttribute="leading" secondItem="ZGX-v3-6qx" secondAttribute="leading" type="default" id="lXg-42-Abw"/>
-                            <constraint firstAttribute="bottom" secondItem="d7r-MS-RaS" secondAttribute="bottom" constant="239" id="oo6-Op-aH9"/>
+                            <constraint firstItem="d7r-MS-RaS" firstAttribute="leading" secondItem="f7I-LQ-gJ1" secondAttribute="leading" constant="241" id="HDP-hd-fKe"/>
+                            <constraint firstItem="d7r-MS-RaS" firstAttribute="centerX" secondItem="ZGX-v3-6qx" secondAttribute="centerX" type="default" id="nhv-3Q-l7D"/>
                         </constraints>
                     </view>
                     <connections>

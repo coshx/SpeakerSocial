@@ -1,10 +1,11 @@
+#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CoreMedia.h>
+
 @interface Audio: NSObject
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
-- (void)play:(double)position;
-- (void)load:(NSString*)url;
-- (double)duration;
-- (NSTimeInterval)currentTime;
-- (void)mute;
+@property (strong, nonatomic) AVAudioPlayer *avPlayer;
+-(void)load:(NSString*)urlString;
+-(void)play:(double)clientStartTime;
 -(BOOL)playing;
 @end

@@ -49,8 +49,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectSongToBroadcast:" destination="2" eventType="touchUpInside" id="3so-dy-7gM"/>
-                                    <segue destination="gjJ-FX-KBR" kind="modal" id="6Sv-Ro-IMF"/>
+                                    <action selector="selectSongToBroadcast:" destination="2" eventType="touchUpInside" id="v5S-qq-dyw"/>
+                                    <segue destination="GB8-IE-pyA" kind="modal" identifier="YouTubeSelectionSeque" id="4Kt-8F-lgI"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWk-oY-Lui" colorLabel="IBBuiltInLabel-Gray">
@@ -81,14 +81,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="H8q-9K-E9L" firstAttribute="top" secondItem="3" secondAttribute="top" constant="174" id="86p-wZ-NqP"/>
-                            <constraint firstItem="iWk-oY-Lui" firstAttribute="top" secondItem="3" secondAttribute="top" constant="143" id="87h-ha-EHG"/>
+                            <constraint firstItem="iWk-oY-Lui" firstAttribute="top" secondItem="3" secondAttribute="top" constant="129" id="HUm-i6-5ly"/>
                             <constraint firstItem="oIO-cE-fBg" firstAttribute="top" secondItem="3" secondAttribute="top" constant="26" id="HX6-gz-8qw"/>
-                            <constraint firstItem="iWk-oY-Lui" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="62" id="JjO-sg-t7j"/>
-                            <constraint firstItem="H8q-9K-E9L" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="aI3-hT-zhe"/>
+                            <constraint firstItem="iWk-oY-Lui" firstAttribute="centerX" secondItem="sjm-fi-Nah" secondAttribute="centerX" type="default" id="LMW-SM-0g1"/>
+                            <constraint firstItem="iWk-oY-Lui" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="62" id="Ujj-e1-cor"/>
+                            <constraint firstItem="H8q-9K-E9L" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="VHH-v2-4gg"/>
                             <constraint firstItem="sjm-fi-Nah" firstAttribute="centerX" secondItem="H8q-9K-E9L" secondAttribute="centerX" type="default" id="dIw-Js-WJk"/>
-                            <constraint firstAttribute="bottom" secondItem="iWk-oY-Lui" secondAttribute="bottom" constant="61" id="evc-XP-b7l"/>
-                            <constraint firstItem="H8q-9K-E9L" firstAttribute="centerX" secondItem="oIO-cE-fBg" secondAttribute="centerX" type="default" id="fDs-IO-wt5"/>
-                            <constraint firstItem="iWk-oY-Lui" firstAttribute="centerX" secondItem="sjm-fi-Nah" secondAttribute="centerX" type="default" id="hAB-WA-Jbv"/>
+                            <constraint firstItem="iWk-oY-Lui" firstAttribute="bottom" secondItem="sjm-fi-Nah" secondAttribute="bottom" type="default" id="j8i-aP-0QW"/>
+                            <constraint firstItem="sjm-fi-Nah" firstAttribute="centerX" secondItem="oIO-cE-fBg" secondAttribute="centerX" type="default" id="yvf-Tg-S2z"/>
                             <constraint firstAttribute="bottom" secondItem="sjm-fi-Nah" secondAttribute="bottom" constant="75" id="zIJ-7z-Xk8"/>
                         </constraints>
                     </view>
@@ -101,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="114"/>
+            <point key="canvasLocation" x="-164" y="-201"/>
         </scene>
         <!--You Tube Controller-->
         <scene sceneID="iO7-xX-cCW">
@@ -111,18 +111,10 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkB-v1-cyf">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="281" id="YnY-6R-Rri"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="dc8-Bz-1e4">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="326" id="BCl-So-HE6"/>
-                                    <constraint firstAttribute="height" constant="392" id="CVG-i7-5FV"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="Ba6-Jy-RmF">
@@ -139,56 +131,41 @@
                                     <outlet property="dataSource" destination="GB8-IE-pyA" id="dme-pF-COc"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="qrN-7i-Wss">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GB8-IE-pyA" id="kcX-8B-55h"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xkB-v1-cyf" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="R1R-v7-GyX"/>
-                            <constraint firstItem="xkB-v1-cyf" firstAttribute="top" secondItem="58A-6W-cWg" secondAttribute="top" constant="20" symbolic="YES" type="default" id="fQB-Hl-0RT"/>
+                            <constraint firstItem="qrN-7i-Wss" firstAttribute="bottom" secondItem="dc8-Bz-1e4" secondAttribute="top" type="default" id="6K3-q4-Ob4"/>
+                            <constraint firstItem="qrN-7i-Wss" firstAttribute="trailing" secondItem="58A-6W-cWg" secondAttribute="trailing" type="default" id="7cG-D2-fDo"/>
+                            <constraint firstItem="qrN-7i-Wss" firstAttribute="top" secondItem="58A-6W-cWg" secondAttribute="top" type="default" id="IIx-ae-ul1"/>
+                            <constraint firstItem="qrN-7i-Wss" firstAttribute="leading" secondItem="58A-6W-cWg" secondAttribute="leading" type="default" id="gcJ-vD-1uE"/>
                             <constraint firstItem="dc8-Bz-1e4" firstAttribute="bottom" secondItem="58A-6W-cWg" secondAttribute="bottom" type="default" id="ij0-Vh-GKB"/>
                             <constraint firstItem="dc8-Bz-1e4" firstAttribute="leading" secondItem="58A-6W-cWg" secondAttribute="leading" type="default" id="o2o-5P-hUF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchDisplayController" destination="Lbu-Hb-ywn" id="Dx5-ZS-0sM"/>
                         <outlet property="tableView" destination="dc8-Bz-1e4" id="dWj-NA-Fvd"/>
                         <outlet property="view" destination="58A-6W-cWg" id="Upc-Zx-2hq"/>
+                        <segue destination="r3t-hv-c4D" kind="modal" identifier="YouTubeToBroadcastSeque" id="W4I-RR-I3I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jtV-Sh-xbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="611" y="-491"/>
-        </scene>
-        <!--Web View Controller-->
-        <scene sceneID="n4J-cJ-SNh">
-            <objects>
-                <viewController id="gjJ-FX-KBR" customClass="WebViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iy2-9F-Nvt">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" restorationIdentifier="" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aXM-oB-yba">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                                <connections>
-                                    <outlet property="delegate" destination="gjJ-FX-KBR" id="wP9-HK-hoW"/>
-                                </connections>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="aXM-oB-yba" firstAttribute="leading" secondItem="iy2-9F-Nvt" secondAttribute="leading" type="default" id="2vu-cW-1Bh"/>
-                            <constraint firstItem="aXM-oB-yba" firstAttribute="trailing" secondItem="iy2-9F-Nvt" secondAttribute="trailing" type="default" id="KVm-BJ-EZt"/>
-                            <constraint firstItem="aXM-oB-yba" firstAttribute="top" secondItem="iy2-9F-Nvt" secondAttribute="top" type="default" id="fdm-0v-Rh8"/>
-                            <constraint firstItem="aXM-oB-yba" firstAttribute="bottom" secondItem="iy2-9F-Nvt" secondAttribute="bottom" type="default" id="yrm-y9-6OI"/>
-                        </constraints>
-                    </view>
+                <searchDisplayController id="Lbu-Hb-ywn">
                     <connections>
-                        <outlet property="viewWeb" destination="aXM-oB-yba" id="bUP-dp-Pvr"/>
-                        <segue destination="r3t-hv-c4D" kind="modal" identifier="SequeToBroadcast" id="2Lw-4c-i9o"/>
+                        <outlet property="delegate" destination="GB8-IE-pyA" id="DkB-xR-2dR"/>
+                        <outlet property="searchContentsController" destination="GB8-IE-pyA" id="tUM-5a-5UA"/>
+                        <outlet property="searchResultsDataSource" destination="GB8-IE-pyA" id="tx1-iG-mn2"/>
+                        <outlet property="searchResultsDelegate" destination="GB8-IE-pyA" id="g2O-Kc-lmR"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Pzd-x6-af7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="490" y="114"/>
+            <point key="canvasLocation" x="283" y="-753"/>
         </scene>
         <!--Broadcast Controller-->
         <scene sceneID="uKG-ed-n0n">
@@ -202,7 +179,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="LvW-zj-pI1"/>
-                                    <constraint firstAttribute="width" constant="308" id="q5m-nR-mLU"/>
+                                    <constraint firstAttribute="width" constant="308" id="jnA-ab-4iZ"/>
                                 </constraints>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -222,17 +199,17 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="broadcastButtonTapped:" destination="r3t-hv-c4D" eventType="touchUpInside" id="8r4-rL-JZV"/>
-                                    <segue destination="kmp-LL-MYD" kind="unwind" unwindAction="returned:" id="kdQ-Jm-e7C"/>
+                                    <action selector="broadcastButtonTapped:" destination="r3t-hv-c4D" eventType="touchUpInside" id="hiG-vF-Yxl"/>
+                                    <segue destination="2" kind="unwind" unwindAction="returned:" id="6zT-kh-OXh"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OxU-8h-tGy" firstAttribute="centerX" secondItem="hHj-5w-2NW" secondAttribute="centerX" type="default" id="2zC-0t-crL"/>
                             <constraint firstItem="Uen-7Z-nsk" firstAttribute="leading" secondItem="hHj-5w-2NW" secondAttribute="leading" type="default" id="3Mi-KT-rg2"/>
+                            <constraint firstItem="OxU-8h-tGy" firstAttribute="centerX" secondItem="hHj-5w-2NW" secondAttribute="centerX" type="default" id="4rZ-nw-Xdv"/>
+                            <constraint firstAttribute="bottom" secondItem="OxU-8h-tGy" secondAttribute="bottom" constant="84" id="Plp-ep-daX"/>
                             <constraint firstItem="Uen-7Z-nsk" firstAttribute="top" secondItem="hHj-5w-2NW" secondAttribute="top" constant="70" id="UvQ-lA-u7A"/>
-                            <constraint firstAttribute="bottom" secondItem="OxU-8h-tGy" secondAttribute="bottom" constant="88" id="VAY-jr-mBo"/>
                         </constraints>
                     </view>
                     <connections>
@@ -240,9 +217,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lMw-A7-3QB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="kmp-LL-MYD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="891" y="114"/>
+            <point key="canvasLocation" x="696" y="-355"/>
         </scene>
     </scenes>
     <classes>
@@ -264,12 +240,6 @@
                 <relationship kind="outlet" name="activityView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="progressBar" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="quoteText" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="WebViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/WebViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="viewWeb" candidateClass="UIWebView"/>
             </relationships>
         </class>
         <class className="YouTubeController" superclassName="UIViewController">

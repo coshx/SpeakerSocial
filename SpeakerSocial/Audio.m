@@ -14,13 +14,14 @@ int syncCount = 0;
     double idealTime = songPosition *1000;
     double playerTime = [self.audioPlayer currentTime]*1000;
     double difference = playerTime - idealTime;
-    //NSLog(@"difference: %f",difference);
+    NSLog(@"difference: %f",difference);
     
-    if(abs(difference)>1 || syncCount<5){
+    if(abs(difference)>10 || syncCount<5){
         syncCount++;
-        [NSThread sleepForTimeInterval:0.200];
+        [NSThread sleepForTimeInterval:0.02];
         [self play:clientStartTime];
     }else{
+        syncCount = 0;
         self.audioPlayer.volume = 1.0;
     }
 }
@@ -29,10 +30,11 @@ int syncCount = 0;
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [NSData dataWithContentsOfURL:url];
     self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
-	[self.audioPlayer prepareToPlay];
+   // [self.audioPlayer prepareToPlay];
     [self.audioPlayer play];
     self.audioPlayer.volume = 0;
 }
+
 
 -(double)duration{
     return self.audioPlayer.duration;
@@ -46,8 +48,10 @@ int syncCount = 0;
 
 -(void)mute{
     self.audioPlayer.volume = 0.0;
-    //[self.audioPlayer pause];  //[audioPlayer stop];
+    //[self.audioPlayer pause]; //[audioPlayer stop];
 }
 
 
 @end
+
+

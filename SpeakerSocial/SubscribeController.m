@@ -24,11 +24,10 @@ dispatch_queue_t bgLoadAudio;
     bgSync = dispatch_queue_create("com.coshx.speakersocial.syncClock", NULL);
     bgMonitor = dispatch_queue_create("com.coshx.speakersocial.monitorClock", NULL);
     [self monitorClock];
-    [self syncClock];
-    
+    [self syncClock];   
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(resync)
-                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
+                                               name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 -(IBAction)selectSongToBroadcast:(id)sender{
@@ -38,17 +37,8 @@ dispatch_queue_t bgLoadAudio;
     [self loadAudio];
 }
 
-
 -(IBAction)returned:(UIStoryboardSegue *)segue {
-    NSData *response = [Network httpGet:@"http://chielo.herokuapp.com/song_info"];
-    
-    if(response == NULL){
-        self.quoteText.text = @"Connectivity problem... please try again later.";
-        return ;
-    }
-    
-    [self loadAudio];
-
+   [self loadAudio];
 }
 
 -(void)resync{
@@ -56,12 +46,11 @@ dispatch_queue_t bgLoadAudio;
     if(self.audio.playing){
         [self loadAudio];
     }
-
 }
 
 -(void)monitorClock{
     dispatch_async(bgMonitor, ^(void) {
-        NSLog(@"%f", [ClockSkew monitorClock]);
+        [ClockSkew monitorClock];
     });
     dispatch_async(bgMonitor, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -69,9 +58,6 @@ dispatch_queue_t bgLoadAudio;
             NSLog(@"-- resyncing --");
             self.quoteText.text = @"resyncing...";
             [self syncClock];
-            if(self.audio.playing){
-                [self loadAudio];
-            }
             [self monitorClock];
         });
     });
@@ -111,15 +97,14 @@ dispatch_queue_t bgLoadAudio;
         [self.progressBar removeFromSuperview];
         return;
     };
-    
+     
     NSDictionary* songData = [JSON parse: response];
     self.quoteText.text = [NSString stringWithFormat:@"Song Title: %@", [songData objectForKey:@"title"]];
-    
     double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
     double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
-    
     dispatch_async(bgLoadAudio, ^(void) {
-        [self.audio = [[Audio alloc] init] load:[songData objectForKey:@"url"]];
+        NSString* url = [[songData objectForKey:@"url"] stringByReplacingOccurrencesOfString:@"_-_-_-_-_" withString:@"&"];
+        [self.audio = [[Audio alloc] init] load:url];
     });
     
     dispatch_async(bgLoadAudio, ^{
@@ -129,8 +114,6 @@ dispatch_queue_t bgLoadAudio;
             [self.audio play:clientStartTime];
         });
    });
-
-    
-   }
+}
 
 @end

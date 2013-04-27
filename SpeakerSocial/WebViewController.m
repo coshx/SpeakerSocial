@@ -7,19 +7,27 @@ NSString* selectedSong;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self load];
+}
+
+-(void)load{
     NSString *urlAddress = @"http://chielo.herokuapp.com";
     NSURL *url = [NSURL URLWithString:urlAddress];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [self.viewWeb loadRequest:requestObj];
+    [self.viewWeb loadRequest:requestObj];   
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([request.URL.scheme isEqualToString:@"inapp"]) {
-        //if ([request.URL.host isEqualToString:@"capture"]) {
+    
+    if(request == NULL){
+        [self load];
+        return NO;
+    }else if ([request.URL.scheme isEqualToString:@"inapp"]) {
         selectedSong = request.URL.host;
         [self performSegueWithIdentifier: @"SequeToBroadcast" sender: self];
         return NO;
     }
+    
     return YES;
 
 }

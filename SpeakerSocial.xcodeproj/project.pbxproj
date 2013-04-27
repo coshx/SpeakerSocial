@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49029C73172C7B4600F6880B /* HCYoutubeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 49029C72172C7B4600F6880B /* HCYoutubeParser.m */; };
 		49195D6C17090AF400570332 /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 49195D6B17090AF400570332 /* Network.m */; };
 		49195D6F1709125200570332 /* JSON.h in Resources */ = {isa = PBXBuildFile; fileRef = 49195D6E1709125200570332 /* JSON.h */; };
 		49195D71170912A700570332 /* JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 49195D70170912A700570332 /* JSON.m */; };
@@ -33,6 +34,9 @@
 		49BD4D291702560F007D65E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49BD4D271702560F007D65E1 /* InfoPlist.strings */; };
 		49BD4D2C1702560F007D65E1 /* SpeakerSocialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49BD4D2B1702560F007D65E1 /* SpeakerSocialTests.m */; };
 		49E411951729788900B0F61E /* libGDataTouchStaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E4118C172977C300B0F61E /* libGDataTouchStaticLib.a */; };
+		49E415531729F70300B0F61E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E415521729F70300B0F61E /* MediaPlayer.framework */; };
+		49E4155C172B185700B0F61E /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E4155B172B185600B0F61E /* MovieViewController.m */; };
+		49E4155E172B6E5400B0F61E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E4155D172B6E5400B0F61E /* CoreMedia.framework */; };
 		FC00CD6117148139005FE306 /* ClockSkew.m in Sources */ = {isa = PBXBuildFile; fileRef = FC00CD6017148139005FE306 /* ClockSkew.m */; };
 		FC00CD6617148146005FE306 /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = FC00CD6317148146005FE306 /* Audio.m */; };
 		FC00CD6717148146005FE306 /* BroadcastController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC00CD6517148146005FE306 /* BroadcastController.m */; };
@@ -93,6 +97,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49029C71172C7B4600F6880B /* HCYoutubeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCYoutubeParser.h; sourceTree = "<group>"; };
+		49029C72172C7B4600F6880B /* HCYoutubeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCYoutubeParser.m; sourceTree = "<group>"; };
 		49195D6A17090ADC00570332 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
 		49195D6B17090AF400570332 /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
 		49195D6E1709125200570332 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -441,6 +447,10 @@
 		49E4154717297C7700B0F61E /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2SignIn.h; sourceTree = "<group>"; };
 		49E4154817297C7700B0F61E /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		49E4154917297C7700B0F61E /* GTMReadMonitorInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMReadMonitorInputStream.h; sourceTree = "<group>"; };
+		49E415521729F70300B0F61E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		49E41556172B184A00B0F61E /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
+		49E4155B172B185600B0F61E /* MovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
+		49E4155D172B6E5400B0F61E /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FC00CD5F17148131005FE306 /* ClockSkew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockSkew.h; sourceTree = "<group>"; };
 		FC00CD6017148139005FE306 /* ClockSkew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockSkew.m; sourceTree = "<group>"; };
 		FC00CD6217148146005FE306 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
@@ -458,13 +468,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E4155E172B6E5400B0F61E /* CoreMedia.framework in Frameworks */,
+				49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */,
+				49E415531729F70300B0F61E /* MediaPlayer.framework in Frameworks */,
 				4947605317281C260055EDB3 /* Security.framework in Frameworks */,
 				4947605517281C3B0055EDB3 /* SystemConfiguration.framework in Frameworks */,
 				49E411951729788900B0F61E /* libGDataTouchStaticLib.a in Frameworks */,
 				494760051727058C0055EDB3 /* libz.dylib in Frameworks */,
 				49330AF717049F6E00A14167 /* AVFoundation.framework in Frameworks */,
 				49BD4CF81702560F007D65E1 /* UIKit.framework in Frameworks */,
-				49BD4CFA1702560F007D65E1 /* Foundation.framework in Frameworks */,
 				49BD4CFC1702560F007D65E1 /* CoreGraphics.framework in Frameworks */,
 				49476001172705190055EDB3 /* libTestFlight.a in Frameworks */,
 			);
@@ -486,6 +498,8 @@
 		49195D6D17090DE700570332 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				49029C71172C7B4600F6880B /* HCYoutubeParser.h */,
+				49029C72172C7B4600F6880B /* HCYoutubeParser.m */,
 				FC00CD6217148146005FE306 /* Audio.h */,
 				FC00CD6317148146005FE306 /* Audio.m */,
 				FC00CD6017148139005FE306 /* ClockSkew.m */,
@@ -521,6 +535,8 @@
 		49BD4CF61702560F007D65E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49E415521729F70300B0F61E /* MediaPlayer.framework */,
+				49E4155D172B6E5400B0F61E /* CoreMedia.framework */,
 				4947605217281C260055EDB3 /* Security.framework */,
 				4947605417281C3B0055EDB3 /* SystemConfiguration.framework */,
 				49330AF617049F6E00A14167 /* AVFoundation.framework */,
@@ -549,6 +565,10 @@
 			isa = PBXGroup;
 			children = (
 				49E4140F17297C7600B0F61E /* Headers */,
+				49E41556172B184A00B0F61E /* MovieViewController.h */,
+				49E4155B172B185600B0F61E /* MovieViewController.m */,
+				FC00CD6B1714816F005FE306 /* WebViewController.m */,
+				FC00CD6A1714816F005FE306 /* WebViewController.h */,
 				494760041727058C0055EDB3 /* libz.dylib */,
 				49475FFD172705190055EDB3 /* libTestFlight.a */,
 				49476000172705190055EDB3 /* TestFlight.h */,
@@ -919,14 +939,12 @@
 		FC00CD6E17148184005FE306 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FC00CD681714816F005FE306 /* SubscribeController.h */,
-				FC00CD691714816F005FE306 /* SubscribeController.m */,
 				49451BA917283F9B00F8135E /* YouTubeController.h */,
 				49451BAE17283FAB00F8135E /* YouTubeController.m */,
-				FC00CD6A1714816F005FE306 /* WebViewController.h */,
-				FC00CD6B1714816F005FE306 /* WebViewController.m */,
 				FC00CD6417148146005FE306 /* BroadcastController.h */,
 				FC00CD6517148146005FE306 /* BroadcastController.m */,
+				FC00CD681714816F005FE306 /* SubscribeController.h */,
+				FC00CD691714816F005FE306 /* SubscribeController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1080,14 +1098,14 @@
 /* Begin PBXShellScriptBuildPhase section */
 		4947600617270F930055EDB3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
@@ -1121,6 +1139,8 @@
 				FC00CD6C1714816F005FE306 /* SubscribeController.m in Sources */,
 				FC00CD6D1714816F005FE306 /* WebViewController.m in Sources */,
 				49451BAF17283FAB00F8135E /* YouTubeController.m in Sources */,
+				49E4155C172B185700B0F61E /* MovieViewController.m in Sources */,
+				49029C73172C7B4600F6880B /* HCYoutubeParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

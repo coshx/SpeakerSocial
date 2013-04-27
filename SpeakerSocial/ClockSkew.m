@@ -29,7 +29,7 @@ const int ROUND_TRIP = 3;
     if(response == NULL) return NULL;
     NSDictionary*  serverResponse = [JSON parse:response];
     double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;
-    double serverTime = [[serverResponse objectForKey:@"time"] doubleValue] ;
+    double serverTime = [[serverResponse objectForKey:@"time"] doubleValue];
     double roundTrip = clientResponseTime - clientRequestTime;
     
     NSArray* sample =@[ @(clientRequestTime), @(clientResponseTime), @(serverTime), @(roundTrip)]; //{}?
@@ -48,7 +48,7 @@ const int ROUND_TRIP = 3;
     double minRoundTrip = [self roundTrip:[samples objectAtIndex:0]];
     double thisRoundTrip;
     
-    for (NSArray *sample in samples) {
+    for (NSArray *sample in samples){
         thisRoundTrip = [self roundTrip:sample];
         if (abs(thisRoundTrip)<abs(minRoundTrip)){
             minRoundTripSample = sample ;

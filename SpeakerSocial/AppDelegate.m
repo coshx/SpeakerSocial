@@ -11,21 +11,7 @@
 @implementation AppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    #define TESTING 1
-    
-    #ifdef TESTING
-        NSString* name  = [[UIDevice currentDevice] name];
-        NSString* model  = [[UIDevice currentDevice] model];
-        NSString* systemName  = [[UIDevice currentDevice] systemName];
-        NSString* systemVersion  = [[UIDevice currentDevice] systemVersion];
-        NSString* uniqueIdentifier = [[UIDevice currentDevice] uniqueIdentifier];
-        NSString *identifier = [NSString stringWithFormat:@"%@ %@ %@ %@ %@", name, model, systemName, systemVersion, uniqueIdentifier];
-       // [TestFlight setDeviceIdentifier:identifier];
-    #endif
-    
-    //[TestFlight takeOff:@"ffcad787-434a-4c54-96f4-0904a1500f84"];
-    
+    [TestFlight takeOff:@"ffcad787-434a-4c54-96f4-0904a1500f84"];
     return YES;
 }
 
