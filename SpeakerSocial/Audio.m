@@ -32,7 +32,7 @@ int syncCount = 0;
 }
 
 -(void)load:(NSString*)urlString{
-    NSURL *url = [NSURL URLWithString:@"http://tinysong.com/ieTc"];
+    NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"URL: %@", url);
     //NSData *data = [NSData dataWithContentsOfURL:url];
     self.audioPlayer = [AudioStreamer streamWithURL:url];
