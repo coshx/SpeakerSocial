@@ -25,7 +25,7 @@ const int ROUND_TRIP = 3;
 
 -(NSMutableArray*)takeSamples:(NSMutableArray*)samples{
     double clientRequestTime = [[NSDate date] timeIntervalSince1970]*1000;
-    NSData* response = [Network httpGet:@"http://chielo.herokuapp.com/time"];
+    NSData* response = [Network httpGet:@"http://speakersocial.herokuapp.com/time"];
     if(response == NULL) return NULL;
     NSDictionary*  serverResponse = [JSON parse:response];
     double clientResponseTime = [[NSDate date] timeIntervalSince1970]*1000;

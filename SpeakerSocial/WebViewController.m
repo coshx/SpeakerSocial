@@ -11,7 +11,7 @@ NSString* selectedSong;
 }
 
 -(void)load{
-    NSString *urlAddress = @"http://chielo.herokuapp.com";
+    NSString *urlAddress = @"http://speakersocial.herokuapp.com";
     NSURL *url = [NSURL URLWithString:urlAddress];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     [self.viewWeb loadRequest:requestObj];   

@@ -19,7 +19,7 @@
    NSLog(@"mp4: %@", mp4);
    NSString* url = [[mp4 objectForKey:@"medium"] stringByReplacingOccurrencesOfString:@"&" withString:@"_-_-_-_-_"];
    NSString *params = [NSString stringWithFormat: @"title=%@&url=%@", @"song tittle", url];
-   [Network httpASyncPost:@"http://chielo.herokuapp.com/song_info" : params];
+   [Network httpASyncPost:@"http://speakersocial.herokuapp.com/song_info" : params];
 }
 
 @end

@@ -1,4 +1,5 @@
 #import "Audio.h"
+
 @interface Audio()
 @end
 @implementation Audio : NSObject
@@ -10,9 +11,13 @@ int syncCount = 0;
     
     double now = [[NSDate date] timeIntervalSince1970]*1000;
     double songPosition = 0.001*(now - clientStartTime);
-    self.audioPlayer.currentTime = songPosition;
+    [self.audioPlayer seekToTime:songPosition];
     double idealTime = songPosition *1000;
-    double playerTime = [self.audioPlayer currentTime]*1000;
+    double playerTime = 0.0;
+    
+    [self.audioPlayer progress:&playerTime];
+
+    playerTime = playerTime * 1000;
     double difference = playerTime - idealTime;
     NSLog(@"difference: %f",difference);
     
@@ -20,30 +25,35 @@ int syncCount = 0;
         syncCount++;
         [NSThread sleepForTimeInterval:0.02];
         [self play:clientStartTime];
-    }else{
+    } else {
         syncCount = 0;
         self.audioPlayer.volume = 1.0;
     }
 }
 
 -(void)load:(NSString*)urlString{
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
+    NSURL *url = [NSURL URLWithString:@"http://tinysong.com/ieTc"];
+    NSLog(@"URL: %@", url);
+    //NSData *data = [NSData dataWithContentsOfURL:url];
+    self.audioPlayer = [AudioStreamer streamWithURL:url];
    // [self.audioPlayer prepareToPlay];
-    [self.audioPlayer play];
+    [self.audioPlayer start];
     self.audioPlayer.volume = 0;
 }
 
 
 -(double)duration{
-    return self.audioPlayer.duration;
+    double dur;
+    [self.audioPlayer duration:&dur];
+    return dur;
 }
 -(NSTimeInterval)currentTime{
-    return self.audioPlayer.currentTime;
+    double prog;
+    [self.audioPlayer progress:&prog];
+    return prog;
 }
 -(BOOL)playing{
-    return self.audioPlayer.playing;
+    return self.audioPlayer.isPlaying;
 }
 
 -(void)mute{

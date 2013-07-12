@@ -90,7 +90,7 @@ dispatch_queue_t bgLoadAudio;
     self.progressBar.center = self.view.center;
     [self.progressBar startAnimating];
     
-    NSData* response = [Network httpGet:@"http://chielo.herokuapp.com/song_info"];
+    NSData* response = [Network httpGet:@"http://speakersocial.herokuapp.com/song_info"];
     if(response == NULL){
         self.quoteText.text = @"Connectivity problem...";
         [self.progressBar stopAnimating];
@@ -103,6 +103,8 @@ dispatch_queue_t bgLoadAudio;
     double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
     double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
     dispatch_async(bgLoadAudio, ^(void) {
+        NSLog(@"Current Thread subs: %@", [NSThread currentThread]);
+        NSLog(@"Main Thread subs: %@", [NSThread mainThread]);
         NSString* url = [[songData objectForKey:@"url"] stringByReplacingOccurrencesOfString:@"_-_-_-_-_" withString:@"&"];
         [self.audio = [[Audio alloc] init] load:url];
     });
