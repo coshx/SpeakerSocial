@@ -82,7 +82,7 @@ struct queued_packet;
 
 /**
  * This class is implemented on top of Apple's AudioQueue framework. This
- * framework is much too low-level for must use cases, so this class
+ * framework is much too low-level for most use cases, so this class
  * encapsulates the functionality to provide a nicer interface. The interface
  * still requires some management, but it is far more sane than dealing with the
  * AudioQueue structures yourself.

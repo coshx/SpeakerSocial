@@ -13,6 +13,7 @@
 dispatch_queue_t bgMonitor; 
 dispatch_queue_t bgSync;
 dispatch_queue_t bgLoadAudio;
+dispatch_queue_t bgPlayAudio;
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -21,6 +22,7 @@ dispatch_queue_t bgLoadAudio;
 - (void)viewDidLoad{
     [super viewDidLoad];
     bgLoadAudio = dispatch_queue_create("com.coshx.speakersocial.loadAudio", NULL);
+    bgPlayAudio = dispatch_queue_create("com.coshx.speakersocial.playAudio", NULL);
     bgSync = dispatch_queue_create("com.coshx.speakersocial.syncClock", NULL);
     bgMonitor = dispatch_queue_create("com.coshx.speakersocial.monitorClock", NULL);
     [self monitorClock];
@@ -62,7 +64,7 @@ dispatch_queue_t bgLoadAudio;
         });
     });
 }
-
+// syncClock
 -(void)syncClock{
     [self.progressBar startAnimating];
     dispatch_async(bgSync, ^(void) {
@@ -103,19 +105,24 @@ dispatch_queue_t bgLoadAudio;
     double serverStartTime = [[songData objectForKey:@"serverStartTime"] doubleValue] ;
     double clientStartTime = serverStartTime - [self.clockSkew doubleValue];
     dispatch_async(bgLoadAudio, ^(void) {
-        NSLog(@"Current Thread subs: %@", [NSThread currentThread]);
-        NSLog(@"Main Thread subs: %@", [NSThread mainThread]);
         NSString* url = [[songData objectForKey:@"url"] stringByReplacingOccurrencesOfString:@"_-_-_-_-_" withString:@"&"];
+        // this is being called in a different thread (not main)
         [self.audio = [[Audio alloc] init] load:url];
+        NSLog(@"audio has been loaded, back in controller");
     });
     
     dispatch_async(bgLoadAudio, ^{
-       dispatch_async(dispatch_get_main_queue(), ^{
             [self.progressBar stopAnimating];
             [self.progressBar removeFromSuperview];
-            [self.audio play:clientStartTime];
-        });
+           NSLog(@"about to call Audio Play");
+            [self.audio play];
+
    });
+
+    dispatch_async(bgPlayAudio, ^{
+            NSLog(@"about to call Audio Sync");
+            [self.audio sync:clientStartTime];
+    });
 }
 
 @end

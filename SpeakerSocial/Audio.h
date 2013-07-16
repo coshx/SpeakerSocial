@@ -8,6 +8,7 @@
 @property (strong, nonatomic) AudioStreamer *audioPlayer;
 @property (strong, nonatomic) AudioStreamer *avPlayer;
 -(void)load:(NSString*)urlString;
--(void)play:(double)clientStartTime;
+-(void)play;
+-(void)sync:(double)clientStartTime;
 -(BOOL)playing;
 @end

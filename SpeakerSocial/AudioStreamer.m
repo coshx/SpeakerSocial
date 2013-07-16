@@ -103,7 +103,6 @@ static void MyPropertyListenerProc(void *inClientData,
 static void MyPacketsProc(void *inClientData, UInt32 inNumberBytes, UInt32
                    inNumberPackets, const void *inInputData,
                    AudioStreamPacketDescription  *inPacketDescriptions) {
-    NSLog(@"mypacketsproc being called");
   AudioStreamer* streamer = (__bridge AudioStreamer *)inClientData;
   [streamer handleAudioPackets:inInputData
                    numberBytes:inNumberBytes
@@ -130,10 +129,8 @@ static void MyAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ,
 /* CFReadStream callback when an event has occurred */
 static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType eventType,
                           void* inClientInfo) {
-    NSLog(@"HELLO");
     AudioStreamer* streamer = (__bridge AudioStreamer *)inClientInfo;
   [streamer handleReadFromStream:aStream eventType:eventType];
-    NSLog(@"break 1");
 
 }
 
@@ -273,6 +270,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
                                            selector:@selector(checkTimeout)
                                            userInfo:nil
                                             repeats:YES];
+    NSLog(@"end of start method");
   return YES;
 }
 
@@ -296,6 +294,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     [self failWithErrorCode:AS_AUDIO_QUEUE_START_FAILED];
     return NO;
   }
+    NSLog(@"starting to play");
   [self setState:AS_PLAYING];
   return YES;
 }
@@ -408,10 +407,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     return YES;
   }
     if (sampleRate <= 0 || (state_ != AS_PLAYING && state_ != AS_PAUSED)) {
-        NSLog(@"???");
-        if (sampleRate <= 0) {
-            NSLog(@"sample rate is: %f", sampleRate);
-        }
         return NO;
     }
 
@@ -422,8 +417,9 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     NSLog(@"error");
     return NO;
   }
-
+    NSLog(@"seek time: %f", seekTime);
   double progress = seekTime + queueTime.mSampleTime / sampleRate;
+    NSLog(@"intermediate value for progress: %f", progress);
   if (progress < 0.0) {
     progress = 0.0;
   }
@@ -592,6 +588,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
  * @return YES if the stream was opened, or NO if it failed to open
  */
 - (BOOL)openReadStream {
+    NSLog(@"calling AudioStreamer.openreadstream");
   NSAssert(stream == NULL, @"Download stream already initialized");
 
   /* Create our GET request */
@@ -689,10 +686,8 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 
   CFReadStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(),
                                   kCFRunLoopCommonModes);
-    NSLog(@"Current Thread: %@", [NSThread currentThread]);
-    NSLog(@"Main Thread: %@", [NSThread mainThread]);
     CFRunLoopRun();
-  return YES;
+    return YES;
 }
 
 //
@@ -734,6 +729,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         if (seekByteOffset != 0) {
           /* If a seek was performed, and no data came back, then we probably
              seeked to the end or near the end of the stream */
+            NSLog(@"set state as done from byte offset stuff");
           [self setState:AS_DONE];
         } else {
           /* In other cases then we just hit an error */
@@ -764,7 +760,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     // we only have a subset of the total bytes.
     //
     if (seekByteOffset == 0) {
-        NSLog(@"seek to time zero");
       fileLength = [httpHeaders[@"Content-Length"] integerValue];
     }
   }
@@ -783,7 +778,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         }
       }
     }
-      NSLog(@"break 2");
     // create an audio file stream parser
     err = AudioFileStreamOpen((__bridge void*) self, MyPropertyListenerProc,
                               MyPacketsProc, fileType, &audioFileStream);
@@ -851,7 +845,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     /* Once we have a small amount of queued data, then we can go ahead and
      * start the audio queue and the file stream should remain ahead of it */
     if (bufferCnt < 3 || buffersUsed > 2) {
-        NSLog(@"mo debuggin");
+        NSLog(@"about to start audio queue");
       err = AudioQueueStart(audioQueue, NULL);
       if (err) {
           NSLog(@"error?!");
@@ -904,6 +898,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 // is true).
 //
 - (void)createQueue {
+
   assert(audioQueue == NULL);
 
   // create the audio queue
@@ -912,12 +907,15 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
                             0, &audioQueue);
   CHECK_ERR(err, AS_AUDIO_QUEUE_CREATION_FAILED);
 
+    NSLog(@"audio queue has been created");
+
   // start the queue if it has not been started already
   // listen to the "isRunning" property
   err = AudioQueueAddPropertyListener(audioQueue, kAudioQueueProperty_IsRunning,
                                       MyAudioQueueIsRunningCallback,
                                       (__bridge void*) self);
   CHECK_ERR(err, AS_AUDIO_QUEUE_ADD_LISTENER_FAILED);
+
 
   /* Try to determine the packet size, eventually falling back to some
      reasonable default of a size */
@@ -1231,7 +1229,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   /* we're only registered for one audio queue... */
   assert(inAQ == audioQueue);
   /* Sanity check to make sure we're on the right thread */
-    NSLog(@"break 3");
     
   // commenting out sanity checks because we know we're on a different thread
   //assert([NSThread currentThread] == [NSThread mainThread]);
@@ -1278,14 +1275,13 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 - (void)handlePropertyChangeForQueue:(AudioQueueRef)inAQ
                           propertyID:(AudioQueuePropertyID)inID {
   /* Sanity check to make sure we're on the expected thread */
-    NSLog(@"break 4");
-  // commenting out sanity checks because we know we're on a different thread
-  // assert([NSThread currentThread] == [NSThread mainThread]);
+  //assert([NSThread currentThread] == [NSThread mainThread]);
   /* We only asked for one property, so the audio queue had better damn well
      only tell us about this property */
   assert(inID == kAudioQueueProperty_IsRunning);
 
   if (state_ == AS_WAITING_FOR_QUEUE_TO_START) {
+      NSLog(@"audio is about to start playing!");
     [self setState:AS_PLAYING];
   } else {
     UInt32 running;
@@ -1293,6 +1289,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     err = AudioQueueGetProperty(audioQueue, kAudioQueueProperty_IsRunning,
                                 &running, &output);
     if (!err && !running && !seeking) {
+        NSLog(@"setting state to done from queue method");
       [self setState:AS_DONE];
     }
   }
